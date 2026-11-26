@@ -1,0 +1,3 @@
+[submodule "upstream/HoloMotion"]
+	path = upstream/HoloMotion
+	url = https://github.com/HorizonRobotics/HoloMotion.git

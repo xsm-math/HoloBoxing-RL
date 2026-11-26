@@ -1,0 +1,140 @@
+{
+  "tested_on": "2026-11-26",
+  "time_zone": "Asia/Shanghai",
+  "upstream_revision": "f52dd81ae935a828b0296f5ee0f833beb7378bf0",
+  "hardware": {
+    "gpu": "NVIDIA GeForce GTX 1660 Ti",
+    "gpu_memory_mib": 6144,
+    "wsl_ram_gib": 7.5,
+    "wsl_swap_gib": 2
+  },
+  "frozen_lower_sha256_verified": "b0681976135eed572d1d20aefc52ec65c149bdc636f2594a6436fa7136a3fc86",
+  "data_completion": {
+    "status": "PASS",
+    "supervised_samples": 11462,
+    "robot_h5_clips": 10,
+    "robot_h5_frames": 11538,
+    "maximum_rotation_basis_error": 5.960464477539062E-07,
+    "prepared_manifest_sha256": "cae283f1326acc4b6f9d8568d6c6ee6428b33da9d26c5c5320fb3404bd2ea38d",
+    "robot_manifest_sha256": "f8e5b1851ecea9daf0ca60ef85282a4fb0930fa189275a560a039ee6e8e38229",
+    "train_h5_manifest_sha256": "2a43aa9fc559d41af78f9230eaae1c84678470b50e4ba121fa67a1c4d2394344",
+    "validation_h5_manifest_sha256": "70eead4a744a75935a0833d19e380cc7b1dd8a095de614cdb4f857e2225fb9af",
+    "validation_scope": "file integrity, current boxing reader, actual HoloMotion V2 reader/FK and geometric basis; no tracking rollout",
+    "source_clips": 8,
+    "sources_sha256": "874609637249f0b4b7a6390ea2c381638f39ccc1b80c2fa63e5ebdd0f2122340",
+    "conversion": "measured"
+  },
+  "supervised": {
+    "progress": {
+      "epochs_completed": 1,
+      "next_batch": 0,
+      "steps": 4
+    },
+    "train_samples": 430,
+    "validation_samples": 6174,
+    "validation_status": "PASS"
+  },
+  "ppo_progress": {
+    "requested_updates": 1,
+    "completed_updates": 1,
+    "total_updates": 1
+  },
+  "ppo": {
+    "total_role_transitions": 32,
+    "optimizer_steps": {
+      "ego": 2,
+      "opponent": 0
+    },
+    "disc_optimizer_steps": 2,
+    "local_recovery_count": 0,
+    "elapsed_seconds": 5.170866109999906,
+    "ego/surrogate": 0.012199442833662033,
+    "ego/value": 0.02861596643924713,
+    "amp/loss": 88.09037399291992
+  },
+  "checkpoint_hashes": {
+    "supervised_sha256": "4a9d9d50319cfce7e91d03d801dd7421fe86381b2f15fe91a3b9dc8a92412c67",
+    "ppo_sha256": "ae0403f9152be4b71b0775f60ef79a16e78a30f7143f5019d68aedc31e28c55a"
+  },
+  "runtime_graph_hashes": {
+    "specialized_sha256": "ec1fba84f0acd7765615690d6a41c21fe45de492a129268a7b08d1c3cc27f1d6",
+    "execution_sha256": "7d2a4a1bd1e9e5cd1e6de94ae03fc8dc0185258541cc6304f02bad896226b600",
+    "execution_bytes": 1647907700,
+    "converter_sha256": "c9ff8e1bee3434cdb9e0e3920632cb5435698d7627a4275ef120ce285b12c97a",
+    "official_conversion_returned_bytes": true
+  },
+  "stage_resources": [
+    {
+      "stage": "data-prepare-w1-allocator",
+      "exit_code": 0,
+      "seconds": 408.86,
+      "samples": 584,
+      "gpu_total_mib": 6144,
+      "gpu_peak_card_used_mib": 2550,
+      "wsl_min_available_mib": 55.2,
+      "wsl_min_swap_free_mib": 0.2,
+      "child_max_rss_mib": 7192.0,
+      "wsl_oom_kills_during_stage": 0
+    },
+    {
+      "stage": "sl-1-epoch-allocator",
+      "exit_code": 0,
+      "seconds": 49.01,
+      "samples": 68,
+      "gpu_total_mib": 6144,
+      "gpu_peak_card_used_mib": 204,
+      "wsl_min_available_mib": 3680.8,
+      "wsl_min_swap_free_mib": 1992.8,
+      "child_max_rss_mib": 3902.2,
+      "wsl_oom_kills_during_stage": 0
+    },
+    {
+      "stage": "ppo-1-update-allocator",
+      "exit_code": -9,
+      "seconds": 208.17,
+      "samples": 294,
+      "gpu_total_mib": 6144,
+      "gpu_peak_card_used_mib": 248,
+      "wsl_min_available_mib": 230.9,
+      "wsl_min_swap_free_mib": 144.9,
+      "child_max_rss_mib": 7236.4,
+      "wsl_oom_kills_during_stage": 1
+    },
+    {
+      "stage": "build-batch4-execution-graph",
+      "exit_code": 0,
+      "seconds": 60.5,
+      "samples": 81,
+      "gpu_total_mib": 6144,
+      "gpu_peak_card_used_mib": 57,
+      "wsl_min_available_mib": 69.4,
+      "wsl_min_swap_free_mib": 1167.7,
+      "child_max_rss_mib": 7140.9,
+      "wsl_oom_kills_during_stage": 0
+    },
+    {
+      "stage": "ppo-1-update-file-cache",
+      "exit_code": 0,
+      "seconds": 184.94,
+      "samples": 260,
+      "gpu_total_mib": 6144,
+      "gpu_peak_card_used_mib": 2010,
+      "wsl_min_available_mib": 865.3,
+      "wsl_min_swap_free_mib": 2035.2,
+      "child_max_rss_mib": 6621.9,
+      "wsl_oom_kills_during_stage": 0
+    }
+  ],
+  "export": {
+    "bytes": 2359996,
+    "sha256": "477984270e13a1ede29e09ba4c2053ad45d3ad7963c2238d2f654e2d348dd331",
+    "max_abs_error": 5.662441253662109E-07,
+    "max_position_error_m": 6.632690807716868E-08,
+    "max_rotation_error_rad": 6.60801046967404E-07,
+    "max_rotation_component_error": 5.662441253662109E-07
+  },
+  "evaluator": {
+    "image": "horizonrobotics/holomotion@sha256:39015e221bdca855897ba77c5ddea28b76b91f538117cbc892ad9575aa3dcd51",
+    "result": "v12-validation.json"
+  }
+}
