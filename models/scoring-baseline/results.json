@@ -1,0 +1,204 @@
+{
+  "model": "holoboxing.onnx",
+  "sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+  "bytes": 30758,
+  "local_date": "2026-11-27",
+  "interface": {
+    "input": "float32 obs[1,1097]",
+    "output": "float32 target_pose[1,225]"
+  },
+  "local_chain_mean_ms": 9.647953000000001,
+  "hardware_qualification": {
+    "measured_gpu": "NVIDIA GeForce RTX 4060",
+    "required_gpu": "RTX 5090",
+    "target_hardware_match": false,
+    "threshold_ms": 10.0,
+    "local_mean_within_budget": true,
+    "official_status": "NOT_EVALUATED",
+    "scope_notice": "These measurements describe this GPU and environment only. Official hardware qualification is not established. Latency cannot be translated by a fixed multiplier."
+  },
+  "matches": [
+    {
+      "side": "red",
+      "score": [
+        77,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 77,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "477984270e13a1ede29e09ba4c2053ad45d3ad7963c2238d2f654e2d348dd331",
+      "opponent": "teammate"
+    },
+    {
+      "side": "blue",
+      "score": [
+        78,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 78,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "477984270e13a1ede29e09ba4c2053ad45d3ad7963c2238d2f654e2d348dd331",
+      "opponent": "teammate"
+    },
+    {
+      "side": "red",
+      "score": [
+        77,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 77,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "477984270e13a1ede29e09ba4c2053ad45d3ad7963c2238d2f654e2d348dd331",
+      "opponent": "teammate"
+    },
+    {
+      "side": "red",
+      "score": [
+        17,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 17,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "9ec60319338f547b7c9d34b5cd5670fb0f7feb56a61e71f592121b99eb93eead",
+      "opponent": "original"
+    },
+    {
+      "side": "blue",
+      "score": [
+        2,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 2,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "9ec60319338f547b7c9d34b5cd5670fb0f7feb56a61e71f592121b99eb93eead",
+      "opponent": "original"
+    },
+    {
+      "side": "red",
+      "score": [
+        5,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 5,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "f6ee5c31a1fa0aa8b9416fafe48f374fb468c7d1a20d90a2a0fb2af061e6d18f",
+      "opponent": "teammate_tested"
+    },
+    {
+      "side": "blue",
+      "score": [
+        9,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 9,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "f6ee5c31a1fa0aa8b9416fafe48f374fb468c7d1a20d90a2a0fb2af061e6d18f",
+      "opponent": "teammate_tested"
+    },
+    {
+      "side": "red",
+      "score": [
+        30,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 30,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "496bc8ff038f56c8d5ae0198a8c56ccf2a1825902f63784e2fa7e32b8becd55e",
+      "opponent": "replay_reviewed"
+    },
+    {
+      "side": "blue",
+      "score": [
+        18,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 18,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "496bc8ff038f56c8d5ae0198a8c56ccf2a1825902f63784e2fa7e32b8becd55e",
+      "opponent": "replay_reviewed"
+    },
+    {
+      "side": "red",
+      "score": [
+        0,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 0,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "96f51cf639ba4fa18b87ac6815100e818b2b1881b4eedded0ddc95d67cfaf6c7",
+      "opponent": "replay_final"
+    },
+    {
+      "side": "blue",
+      "score": [
+        30,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 30,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "96f51cf639ba4fa18b87ac6815100e818b2b1881b4eedded0ddc95d67cfaf6c7",
+      "opponent": "replay_final"
+    },
+    {
+      "side": "red",
+      "score": [
+        29,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 29,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "715b06d75d543da54e7eac98eaf16d94e098f18ef6deb217531b7050e633c134",
+      "opponent": "replay_guard"
+    },
+    {
+      "side": "blue",
+      "score": [
+        15,
+        0
+      ],
+      "duration_s": 60.0,
+      "valid_hits": 15,
+      "falls": 0,
+      "end_reason": "TIME",
+      "model_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "opponent_sha256": "715b06d75d543da54e7eac98eaf16d94e098f18ef6deb217531b7050e633c134",
+      "opponent": "replay_guard"
+    }
+  ]
+}

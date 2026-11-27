@@ -2,6 +2,10 @@
 
 复现地平线 H-Bot 赛题二的官方仿真训练流程，围绕 PPO、GAE、AMP、实测状态模仿、自博弈和分层控制开展源码学习。
 
+## 可用于对战的模型
+
+新增 [主动得分对战基线](models/scoring-baseline/README.md)，含自包含 ONNX、模型哈希和本地对战结果，供防守策略研究。该模型对队友提交版的标准红蓝对局结果为 77∶0、78∶0，原有训练复现记录见下文。
+
 ## 当前进展
 
 官方 HoloMotion 以 Git 子模块固定在 `f52dd81ae935a828b0296f5ee0f833beb7378bf0`。训练沿用官方 MuJoCo 环境、PPO、AMP 与冻结的 HoloMotion 2.0 底层控制器。 [官方中文版教程](https://github.com/HorizonRobotics/HoloMotion/blob/f52dd81ae935a828b0296f5ee0f833beb7378bf0/holoboxing/README.zh-CN.md)
