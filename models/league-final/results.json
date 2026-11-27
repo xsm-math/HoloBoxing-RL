@@ -1,0 +1,791 @@
+{
+  "model": "holoboxing.onnx",
+  "strategy": "reactive_r3",
+  "sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+  "bytes": 45459,
+  "local_date": "2026-11-27",
+  "timezone": "Asia/Shanghai",
+  "interface": {
+    "input": "float32 obs[1,1097]",
+    "output": "float32 target_pose[1,225]"
+  },
+  "score_convention": "score_own_first is always [delivered model, opponent], irrespective of colour",
+  "requested_opponents": [
+    "teammate",
+    "defense_original",
+    "defense_escape",
+    "baseline"
+  ],
+  "evaluation": {
+    "platform": "Windows adapted v12",
+    "gpu": "NVIDIA GeForce RTX 4060 8GB",
+    "initial_positions": "standard x=-1m/+1m, red/blue swapped",
+    "duration_s": 60,
+    "control_hz": 50,
+    "physics_hz": 200,
+    "fingerprint": {
+      "core_source_sha256": "1645b97ef3684271f72291ef0787aadf074daf59c2d8c3de5041a771efe92f15",
+      "lower_controller_model_sha256": "b0681976135eed572d1d20aefc52ec65c149bdc636f2594a6436fa7136a3fc86",
+      "lower_controller_config_sha256": "e8ad79d65bbe9fa030927dd7f32ef777e6ad8fea8ee825310920f438255f4e10",
+      "physics_ordering": "single_arena_ordered_gpu_v2",
+      "compiled_observation_manifest_sha256": "327809b08903c673c0fd1782b3e6b5c83288fcaee59b148b0be3aa60aed2e4d2",
+      "arena_version": "smplolympics-boxing-ring-v2",
+      "scoring_version": "hands_only_normal_impulse20ms_5Ns_cooldown200ms_fall030_ko1000_v6"
+    }
+  },
+  "matches": [
+    {
+      "opponent": "baseline",
+      "opponent_label": "初始进攻基线",
+      "side": "blue",
+      "score_own_first": [
+        5,
+        4
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        5,
+        4
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        4,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "longest_no_score_s": 49.56,
+      "match_json_sha256": "a79cb1f9629b5f3aef156a2648b7e7c46d3b916f44e2b407c049b741b9c11c78",
+      "replay_hdf5_sha256": "e998825afee8ced68023a1e33e7905515f2deaa84d72b9835d079665155f5a41"
+    },
+    {
+      "opponent": "baseline",
+      "opponent_label": "初始进攻基线",
+      "side": "red",
+      "score_own_first": [
+        25,
+        21
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "785a16a3c81abeecd8e4abd842ffeb8fd0b417658af3c81a42ab4c66f2b4acd6",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        25,
+        21
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        5,
+        6,
+        6,
+        5,
+        3,
+        0
+      ],
+      "longest_no_score_s": 15.14,
+      "match_json_sha256": "cb8c1374f68377ba22eb686aeb17251dbe1cc3a8bd00f8f491d40fe03a553dc1",
+      "replay_hdf5_sha256": "4239a2a7d4a54cad6aa818a8f3dc66c19d8fd10630f932a92803246e83abb705"
+    },
+    {
+      "opponent": "imitation_r1",
+      "opponent_label": "模仿版 R1",
+      "side": "blue",
+      "score_own_first": [
+        34,
+        29
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "39f50e3f143a2257dd3bc720328da69b27df290a952acc7932f71bd48664c31b",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        34,
+        29
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        4,
+        5,
+        8,
+        5,
+        6,
+        6
+      ],
+      "longest_no_score_s": 4.52,
+      "match_json_sha256": "9b1d4b2d08922906461a59a62b99476019310c236f11a5cd89a7b5c14e7e942b",
+      "replay_hdf5_sha256": "ee78aab8281575c8dd4bf1e9aee2864e028882ec1660b923d940da704c90adcc"
+    },
+    {
+      "opponent": "imitation_r1",
+      "opponent_label": "模仿版 R1",
+      "side": "red",
+      "score_own_first": [
+        35,
+        31
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "39f50e3f143a2257dd3bc720328da69b27df290a952acc7932f71bd48664c31b",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        35,
+        31
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        5,
+        5,
+        9,
+        6,
+        6,
+        4
+      ],
+      "longest_no_score_s": 5.26,
+      "match_json_sha256": "2a2d8b74e30e89aef7752682dc6ca5542a9fd1e152fa6aec95c9bc58926d6dae",
+      "replay_hdf5_sha256": "b095e6578caaa2dceed2ce53bad3881c2127644c4fe1d65538972a103b6e1ff0"
+    },
+    {
+      "opponent": "imitation_r3",
+      "opponent_label": "模仿版 R3",
+      "side": "blue",
+      "score_own_first": [
+        30,
+        26
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "51d91866c51f11f98be6be32ec41da1818a4824833b5635300d87faaf4923a50",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        30,
+        26
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        4,
+        4,
+        6,
+        3,
+        8,
+        5
+      ],
+      "longest_no_score_s": 4.9,
+      "match_json_sha256": "cc21dd4ff88222fe875ce1e9f9a31a84b9629f2079e02cbe98d06db94532155d",
+      "replay_hdf5_sha256": "3e6c060b0f86ee94e152f7a3084de3f928afe05aded0bea97ca451907b3eacd2"
+    },
+    {
+      "opponent": "imitation_r3",
+      "opponent_label": "模仿版 R3",
+      "side": "red",
+      "score_own_first": [
+        35,
+        31
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "51d91866c51f11f98be6be32ec41da1818a4824833b5635300d87faaf4923a50",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        35,
+        31
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        5,
+        5,
+        9,
+        6,
+        6,
+        4
+      ],
+      "longest_no_score_s": 5.26,
+      "match_json_sha256": "869cd92f7348299aed94775ec62216c8ef0a82b4669449d0fd2b0def2f655f8a",
+      "replay_hdf5_sha256": "4c98a132f8267960284e67e4e10d12a212542344ed98d2fda1d275ca5222bd00"
+    },
+    {
+      "opponent": "tempo_r3",
+      "opponent_label": "节奏版 R3",
+      "side": "blue",
+      "score_own_first": [
+        18,
+        15
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "765e67dc52671e5a91da60bba24674d836ddcb9415c429229c5448e66ec7f935",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        18,
+        15
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        3,
+        0,
+        3,
+        3,
+        5,
+        4
+      ],
+      "longest_no_score_s": 15.86,
+      "match_json_sha256": "4d497de1e7bbb3d3ff7543751933e49b9eb4b859563b195e0468f69fcb6ee542",
+      "replay_hdf5_sha256": "a75e2f890673bd933d0caf47b9257bcd1060252304dc690d512f4fe2c15ddf5f"
+    },
+    {
+      "opponent": "tempo_r3",
+      "opponent_label": "节奏版 R3",
+      "side": "red",
+      "score_own_first": [
+        12,
+        23
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "765e67dc52671e5a91da60bba24674d836ddcb9415c429229c5448e66ec7f935",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        12,
+        23
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        0,
+        0,
+        1,
+        7,
+        0,
+        4
+      ],
+      "longest_no_score_s": 28.6,
+      "match_json_sha256": "50fbf1bac6006bf0df6556b3e6861417c24178855739ac5b4f247de70fdc3dcf",
+      "replay_hdf5_sha256": "e4f7a375d5129d659725af644fb124d0071c98ace1f0cd34cda3b922053e10a2"
+    },
+    {
+      "opponent": "teammate",
+      "opponent_label": "队友原始提交模型",
+      "side": "red",
+      "score_own_first": [
+        62,
+        0
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "477984270e13a1ede29e09ba4c2053ad45d3ad7963c2238d2f654e2d348dd331",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        62,
+        0
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        4,
+        13,
+        10,
+        10,
+        9,
+        16
+      ],
+      "longest_no_score_s": 4.8,
+      "match_json_sha256": "21feb10821ce1ded0789637765cbc4f37fac4b1d705335c39d0a0e1abe34014b",
+      "replay_hdf5_sha256": "4b895947630b7b237e9e31b33e6d30916ee0f32a1df19ba31fc510aebc047487"
+    },
+    {
+      "opponent": "teammate",
+      "opponent_label": "队友原始提交模型",
+      "side": "blue",
+      "score_own_first": [
+        105,
+        0
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "477984270e13a1ede29e09ba4c2053ad45d3ad7963c2238d2f654e2d348dd331",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        105,
+        0
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        6,
+        20,
+        19,
+        26,
+        12,
+        22
+      ],
+      "longest_no_score_s": 3.42,
+      "match_json_sha256": "60c7cdd163dc0d1ff7d1a8840603a30b9963561807218ae31888a22310ba30c9",
+      "replay_hdf5_sha256": "03da3665287140b799e4864ea6c26144f0427fd619a134a2f6cab23744de9cc6"
+    },
+    {
+      "opponent": "defense_original",
+      "opponent_label": "最早防御版",
+      "side": "red",
+      "score_own_first": [
+        7,
+        0
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "9ec60319338f547b7c9d34b5cd5670fb0f7feb56a61e71f592121b99eb93eead",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        7,
+        0
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "longest_no_score_s": 46.86,
+      "match_json_sha256": "e87c83ff582bd45b4f7d801e2d479dfb8f5426174821269e48a53f304175b83c",
+      "replay_hdf5_sha256": "4fb8b32cbb73cd925780ba7911dbbec9b32827fbaaa4e0b45acb434d606052ea"
+    },
+    {
+      "opponent": "defense_original",
+      "opponent_label": "最早防御版",
+      "side": "blue",
+      "score_own_first": [
+        5,
+        0
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "9ec60319338f547b7c9d34b5cd5670fb0f7feb56a61e71f592121b99eb93eead",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        5,
+        0
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        0,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "longest_no_score_s": 43.72,
+      "match_json_sha256": "77cd6be80a4e5f58db940e6896e00ebbe1e48664634f5542a6cb95d9ab4da30e",
+      "replay_hdf5_sha256": "036bd3b27449d947dbff9a7614cbc6f9a41f4ba54859c8163c22acc0b1f10394"
+    },
+    {
+      "opponent": "defense_escape",
+      "opponent_label": "侧移脱困防御版",
+      "side": "red",
+      "score_own_first": [
+        2,
+        0
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "96f51cf639ba4fa18b87ac6815100e818b2b1881b4eedded0ddc95d67cfaf6c7",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        2,
+        0
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "longest_no_score_s": 57.54,
+      "match_json_sha256": "9c8cd1e72792f3c97d794182beb6a4a8eaacc432a792c225df31c5b780783b13",
+      "replay_hdf5_sha256": "78a335bcc565c575857575ba27039cc6347d288731fb0e4a68c25baa6cb209be"
+    },
+    {
+      "opponent": "defense_escape",
+      "opponent_label": "侧移脱困防御版",
+      "side": "blue",
+      "score_own_first": [
+        16,
+        0
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "96f51cf639ba4fa18b87ac6815100e818b2b1881b4eedded0ddc95d67cfaf6c7",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        16,
+        0
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        0,
+        3,
+        5,
+        2,
+        3,
+        3
+      ],
+      "longest_no_score_s": 14.64,
+      "match_json_sha256": "22a977e75502c5c3ff6a863f7b1f472a3e20c9d9c74bd79201fd8d01971af99b",
+      "replay_hdf5_sha256": "2806d30dab85d0a26fb274d763fd689f6b9a2143aa783c7317e84ba27bb6cf06"
+    },
+    {
+      "opponent": "reactive_r1",
+      "opponent_label": "反应版 R1",
+      "side": "red",
+      "score_own_first": [
+        17,
+        28
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "956489b4b9e1fe87f5219ce969796f4c23e6e3806bbc8ffb41f7ecf0a9314c56",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        17,
+        28
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        4,
+        1,
+        0,
+        5,
+        6,
+        1
+      ],
+      "longest_no_score_s": 15.5,
+      "match_json_sha256": "d22cbe9a076d665ccefdb210b6051b45112aeef90386351d46a13f9e54aab6cb",
+      "replay_hdf5_sha256": "21eef18560fbc84d7bd403be5f140d34f6af4ab653f699fc02d212a2412b1a03"
+    },
+    {
+      "opponent": "reactive_r1",
+      "opponent_label": "反应版 R1",
+      "side": "blue",
+      "score_own_first": [
+        19,
+        26
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "956489b4b9e1fe87f5219ce969796f4c23e6e3806bbc8ffb41f7ecf0a9314c56",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        19,
+        26
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        3,
+        1,
+        3,
+        3,
+        2,
+        7
+      ],
+      "longest_no_score_s": 9.94,
+      "match_json_sha256": "90a8f777870f95d35aae73f8c799c744fb61f014b2357c5469f80b84f817bc15",
+      "replay_hdf5_sha256": "33e8f0b512e55b3e0b937c72145c9f222c30682ca0e1ec288aecd9cdabc922b3"
+    },
+    {
+      "opponent": "tempo_r2",
+      "opponent_label": "节奏版 R2",
+      "side": "red",
+      "score_own_first": [
+        30,
+        17
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "47856d2121839f69625c18d26dd96fd914b01525dd66e17f9ded5800bb3b9367",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        30,
+        17
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        4,
+        3,
+        6,
+        8,
+        3,
+        6
+      ],
+      "longest_no_score_s": 5.3,
+      "match_json_sha256": "00466d54d10f190a8ee385157d9f2cb3e3123f0a4e5deb374e1377164f91aa8b",
+      "replay_hdf5_sha256": "82c414192ed3991ef5f72c1cbed23596341b0a2ae1c1c056848977697bc653ba"
+    },
+    {
+      "opponent": "tempo_r2",
+      "opponent_label": "节奏版 R2",
+      "side": "blue",
+      "score_own_first": [
+        27,
+        17
+      ],
+      "model_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+      "opponent_sha256": "47856d2121839f69625c18d26dd96fd914b01525dd66e17f9ded5800bb3b9367",
+      "duration_s": 60.0,
+      "end_reason": "TIME",
+      "valid_hits_own_first": [
+        27,
+        17
+      ],
+      "falls_own_first": [
+        0,
+        0
+      ],
+      "ko_own_first": [
+        0,
+        0
+      ],
+      "points_per_10s": [
+        5,
+        4,
+        5,
+        5,
+        4,
+        4
+      ],
+      "longest_no_score_s": 4.9,
+      "match_json_sha256": "21839134cd8f73a08fb923ed3aa1cf43ef06828af121da4419705b5ef459b97e",
+      "replay_hdf5_sha256": "2660efda13ae1ef3696e19240f33e4c9fa79f8b263c846e1b7b8dc3aee630ad1"
+    }
+  ],
+  "league_standings": [
+    {
+      "name": "reactive_r3",
+      "games": 18,
+      "wins": 15,
+      "draws": 0,
+      "losses": 3,
+      "points": 15.0,
+      "worst_opponent_points": 0.0,
+      "falls": 0,
+      "normalised_margin": 0.31267279141069276,
+      "scored": 484,
+      "conceded": 268
+    },
+    {
+      "name": "tempo_r3",
+      "games": 18,
+      "wins": 14,
+      "draws": 1,
+      "losses": 3,
+      "points": 14.5,
+      "worst_opponent_points": 0.5,
+      "falls": 0,
+      "normalised_margin": 0.37113555188065245,
+      "scored": 517,
+      "conceded": 251
+    },
+    {
+      "name": "imitation_r1",
+      "games": 18,
+      "wins": 12,
+      "draws": 0,
+      "losses": 6,
+      "points": 12.0,
+      "worst_opponent_points": 0.0,
+      "falls": 0,
+      "normalised_margin": 0.3579402461954985,
+      "scored": 518,
+      "conceded": 294
+    },
+    {
+      "name": "baseline",
+      "games": 18,
+      "wins": 8,
+      "draws": 1,
+      "losses": 9,
+      "points": 8.5,
+      "worst_opponent_points": 0.0,
+      "falls": 0,
+      "normalised_margin": 0.1705444870120258,
+      "scored": 436,
+      "conceded": 308
+    }
+  ],
+  "local_chain": {
+    "mean_ms": 6.772427999999999,
+    "p50_ms": 6.6845,
+    "p95_ms": 7.7441949999999995,
+    "maximum_ms": 9.3983,
+    "warmup": 10,
+    "iterations": 100,
+    "scope": "single_fighter_upper_observation_inference_decode_lower_observation_inference_cache_target; excludes_output_sanitization_and_physics",
+    "gpu": "NVIDIA GeForce RTX 4060",
+    "execution_provider": "CUDAExecutionProvider",
+    "upper_sha256": "f390635f5dc4d27e02df78e2ed10db8efe7ff5411f6cc286aff5164061ca02e8",
+    "lower_sha256": "b0681976135eed572d1d20aefc52ec65c149bdc636f2594a6436fa7136a3fc86"
+  },
+  "official_cloud_qualification": "NOT_EVALUATED",
+  "delivered_copy_repeat": {
+    "side": "blue",
+    "score_own_first": [
+      105,
+      0
+    ],
+    "falls_own_first": [
+      0,
+      0
+    ],
+    "duration_s": 60,
+    "exact_score_repeat": true,
+    "activity": {
+      "points_per_10s": [
+        6,
+        20,
+        19,
+        26,
+        12,
+        22
+      ],
+      "longest_no_score_s": 3.42,
+      "last20_points": 34
+    },
+    "match_json_sha256": "c64ed237ca042f91908a6790f8a95e87be7417ad80a5e0ebec6f5af1da7d36ab",
+    "replay_hdf5_sha256": "67b81f4276b11be21eee9246596bc7826304a12397370ea45aaa45b280bdbf95",
+    "counted_in_18_bouts": false
+  },
+  "evidence_scope": "Fixed-start deterministic development-pool comparison; some archived bouts were reused and re-audited. Not independent statistical trials or a held-out generalisation test. Raw replays remain in the local workspace.",
+  "limitations": {
+    "longest_no_score_s": 57.54,
+    "mean_longest_no_score_s": 18.65111111111111,
+    "bouts_with_20s_no_score": 5,
+    "mean_facing_error_median_deg": 22.689913993383897,
+    "mean_tilt_p95_deg": 14.017201143888723,
+    "minimum_pelvis_height_m": 0.5949505567550659
+  }
+}
