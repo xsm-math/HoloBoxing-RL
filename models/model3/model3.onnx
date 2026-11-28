@@ -1,0 +1,1930 @@
+	:íÕ	
+D
+wide_state_gains_flat_sizewide_state_gains_zero"ConstantOfShape
+j
+wide_state_gains_zero
+wide_state_gains_index
+wide_state_gains_valueswide_state_gains_flat"	ScatterND
+J
+wide_state_gains_flat
+wide_state_gains_shapewide_state_gains"Reshape
+N
+wide_support_response_flat_sizewide_support_response_zero"ConstantOfShape
+~
+wide_support_response_zero
+wide_support_response_index
+wide_support_response_valueswide_support_response_flat"	ScatterND
+Y
+wide_support_response_flat
+wide_support_response_shapewide_support_response"Reshape
+J
+wide_locomotion_map_flat_sizewide_locomotion_map_zero"ConstantOfShape
+v
+wide_locomotion_map_zero
+wide_locomotion_map_index
+wide_locomotion_map_valueswide_locomotion_map_flat"	ScatterND
+S
+wide_locomotion_map_flat
+wide_locomotion_map_shapewide_locomotion_map"Reshape
+F
+wide_transfer_map_flat_sizewide_transfer_map_zero"ConstantOfShape
+n
+wide_transfer_map_zero
+wide_transfer_map_index
+wide_transfer_map_valueswide_transfer_map_flat"	ScatterND
+M
+wide_transfer_map_flat
+wide_transfer_map_shapewide_transfer_map"Reshape
+>
+obs
+wide_state_gains
+wide_offsetwide_balance_error"Gemm
+.
+wide_balance_errorwide_bounded_error"Tanh
+R
+wide_bounded_error
+wide_support_response
+wide_stancewide_stance_target"Gemm
+:
+obs
+wide_peer_x_indexwide_peer_x"Gather*
+axis†
+:
+obs
+wide_peer_y_indexwide_peer_y"Gather*
+axis†
+6
+obs
+wide_time_index	wide_time"Gather*
+axis†
+(
+wide_peer_x
+wide_peer_xwide_x2"Mul
+(
+wide_peer_y
+wide_peer_ywide_y2"Mul
+ 
+wide_x2
+wide_y2wide_d2"Add
+&
+wide_d2
+wide_epswide_d2_safe"Add
+
+wide_d2_safe	wide_dist"Sqrt
+5
+obs
+wide_self_vx_idxwide_vx"Gather*
+axis†
+5
+obs
+wide_self_vy_idxwide_vy"Gather*
+axis†
+%
+wide_vx
+wide_peer_xwide_vxx"Mul
+%
+wide_vy
+wide_peer_ywide_vyy"Mul
+&
+wide_vxx
+wide_vyywide_vr_sum"Add
+&
+wide_vr_sum
+	wide_distwide_vr"Div
+ 
+wide_vrwide_bounded_vr"Tanh
+=
+wide_bounded_vr
+wide_lookaheadwide_projected_motion"Mul
+;
+	wide_dist
+wide_projected_motionwide_projected_gap"Sub
+J
+obs
+wide_obstacle_pelvis_idxwide_obstacle_pelvis"Gather*
+axis†
+@
+obs
+wide_left_glove_idxwide_left_glove"Gather*
+axis†
+B
+obs
+wide_right_glove_idxwide_right_glove"Gather*
+axis†
+>
+obs
+wide_left_foot_idxwide_left_foot"Gather*
+axis†
+@
+obs
+wide_right_foot_idxwide_right_foot"Gather*
+axis†
+5
+wide_left_foot
+wide_right_footwide_feet_sum"Add
+;
+wide_feet_sum
+wide_foot_term_factorwide_foot_term"Mul
+9
+wide_left_glove
+wide_right_glovewide_gloves_sum"Add
+?
+wide_gloves_sum
+wide_glove_term_factorwide_glove_term"Mul
+F
+wide_obstacle_pelvis
+wide_pelvis_term_factorwide_pelvis_term"Mul
+H
+wide_pelvis_term
+wide_foot_term
+wide_glove_termwide_footprint"Sum
+D
+wide_footprint
+wide_footprintwide_footprint_radius_squares"Mul
+k
+wide_footprint_radius_squares
+wide_review_xy_axiswide_footprint_radius_sum"	ReduceSum*
+keepdims†
+M
+wide_footprint_radius_sum
+wide_eps!wide_footprint_radius_regularized"Add
+@
+!wide_footprint_radius_regularizedwide_footprint_radius"Sqrt
+D
+wide_footprint
+wide_footprint_radiuswide_footprint_bearing"Div
+A
+wide_left_glove
+wide_left_glovewide_left_radius_squares"Mul
+a
+wide_left_radius_squares
+wide_review_xy_axiswide_left_radius_sum"	ReduceSum*
+keepdims†
+C
+wide_left_radius_sum
+wide_epswide_left_radius_regularized"Add
+6
+wide_left_radius_regularizedwide_left_radius"Sqrt
+D
+wide_right_glove
+wide_right_glovewide_right_radius_squares"Mul
+c
+wide_right_radius_squares
+wide_review_xy_axiswide_right_radius_sum"	ReduceSum*
+keepdims†
+E
+wide_right_radius_sum
+wide_epswide_right_radius_regularized"Add
+8
+wide_right_radius_regularizedwide_right_radius"Sqrt
+>
+wide_left_radius
+wide_right_radiuswide_nearest_glove"Min
+;
+	wide_dist
+wide_nearest_glovewide_glove_protrusion"Sub
+E
+wide_glove_protrusion
+wide_glove_allowancewide_excess_glove"Sub
+/
+wide_excess_glovewide_extra_proximity"Relu
+X
+wide_extra_proximity
+ wide_proximity_adjustment_factorwide_proximity_adjustment"Mul
+H
+wide_projected_gap
+wide_proximity_adjustmentwide_near_estimate"Sub
+B
+wide_inner_distance
+wide_near_estimatewide_inside_margin"Sub
+C
+wide_projected_gap
+wide_outer_distancewide_outside_margin"Sub
+H
+wide_inside_margin
+wide_near_strength_factorwide_near_strength"Mul
+@
+wide_near_strength
+	wide_zero
+wide_onewide_need_space"Clip
+G
+wide_outside_margin
+wide_far_strength_factorwide_far_strength"Mul
+A
+wide_far_strength
+	wide_zero
+wide_onewide_room_to_move"Clip
+I
+obs
+wide_r3_old_root_indiceswide_r3_old_root_xy"Gather*
+axis†
+H
+wide_r3_old_root_xy
+wide_footprint_bearingwide_r3_travel_parts"Mul
+\
+wide_r3_travel_parts
+wide_review_xy_axiswide_r3_past_radial"	ReduceSum*
+keepdims†
+3
+wide_r3_past_radialwide_r3_negative_travel"Neg
+1
+wide_r3_negative_travelwide_r3_approach"Relu
+>
+wide_r3_approach
+wide_r3_preview_gainwide_r3_preview"Mul
+S
+wide_r3_preview
+	wide_zero
+wide_r3_preview_limitwide_r3_approach_preview"Clip
+<
+	wide_dist
+wide_r3_approach_previewwide_r3_safe_gap"Sub
+A
+wide_r3_onset
+wide_r3_safe_gapwide_r3_compression_depth"Sub
+Y
+wide_r3_compression_depth
+wide_r3_compression_gain_gainwide_r3_compression_gain"Mul
+J
+wide_r3_compression_gain
+	wide_zero
+wide_onewide_r3_compression"Clip
+9
+wide_r3_compressionwide_r3_compression_activity"Sqrt
+L
+wide_r3_past_radial
+wide_r3_retreat_deadbandwide_r3_retreat_excess"Sub
+T
+wide_r3_retreat_excess
+wide_r3_retreat_history_gainwide_r3_retreat_history"Mul
+L
+wide_r3_retreat_history
+	wide_zero
+wide_onewide_r3_recent_retreat"Clip
+8
+wide_r3_release
+	wide_distwide_r3_release_depth"Sub
+O
+wide_r3_release_depth
+wide_r3_release_scale_gainwide_r3_release_scale"Mul
+J
+wide_r3_release_scale
+	wide_zero
+wide_onewide_r3_inside_release"Clip
+D
+wide_r3_recent_retreat
+wide_r3_inside_releasewide_r3_carry"Mul
+I
+wide_r3_carry
+wide_r3_carried_escape_gainwide_r3_carried_escape"Mul
+K
+wide_r3_compression_activity
+wide_r3_carried_escapewide_r3_escape"Max
+R
+wide_r3_compression_activity
+wide_r3_active_gait_gainwide_r3_active_gait"Mul
+E
+wide_r3_carry
+wide_r3_carried_gait_gainwide_r3_carried_gait"Mul
+F
+wide_r3_active_gait
+wide_r3_carried_gaitwide_r3_minimum_gait"Max
+]
+wide_need_space
+wide_room_to_move
+wide_minimum_step
+wide_r3_minimum_gait	wide_gate"Max
+A
+wide_room_to_move
+wide_far_radial_factorwide_far_radial"Mul
+A
+wide_need_space
+wide_near_radial_factorwide_near_radial"Mul
+=
+wide_far_radial
+wide_near_radialwide_radial_command"Sub
+C
+wide_need_space
+wide_near_lateral_factorwide_near_lateral"Mul
+C
+wide_room_to_move
+wide_far_lateral_factorwide_far_lateral"Mul
+B
+wide_near_lateral
+wide_far_lateralwide_requested_tangent"Add
+F
+wide_requested_tangent
+wide_minimum_stepwide_lateral_command"Max
+L
+wide_footprint_bearing
+wide_x_columnwide_bearing_x"Gather*
+axis†
+L
+wide_footprint_bearing
+wide_y_columnwide_bearing_y"Gather*
+axis†
+<
+wide_r3_safe_gap
+wide_r3_onsetwide_r3_cap_distance"Sub
+F
+wide_r3_cap_distance
+wide_r3_cap_slope_gainwide_r3_cap_slope"Mul
+\
+wide_r3_compression_activity
+wide_r3_retreat_variable_gainwide_r3_retreat_variable"Mul
+P
+wide_r3_retreat_base
+wide_r3_retreat_variablewide_r3_retreat_magnitude"Add
+:
+wide_r3_retreat_magnitudewide_r3_negative_retreat"Neg
+F
+wide_r3_cap_slope
+wide_r3_negative_retreatwide_r3_radial_cap"Max
+>
+wide_radial_command
+wide_r3_radial_capwide_r3_radial"Min
+J
+wide_r3_escape
+wide_r3_escape_lateral_gainwide_r3_escape_lateral"Mul
+D
+wide_lateral_command
+wide_r3_escape_lateralwide_r3_lateral"Add
+4
+wide_r3_radial
+wide_bearing_xwide_radial_x"Mul
+6
+wide_r3_lateral
+wide_bearing_ywide_lateral_x"Mul
+-
+wide_radial_x
+wide_lateral_xwide_dx"Add
+4
+wide_r3_radial
+wide_bearing_ywide_radial_y"Mul
+6
+wide_r3_lateral
+wide_bearing_xwide_lateral_y"Mul
+-
+wide_radial_y
+wide_lateral_ywide_dy"Sub
+,
+	wide_time
+wide_frequency
+wide_phase"Mul
+>
+
+wide_phase
+wide_future_phasewide_future_phase_values"Add
+*
+wide_future_phase_values	wide_wave"Sin
+4
+wide_future_phase_valueswide_swing_velocity"Cos
+(
+wide_swing_velocitywide_negwave"Neg
+%
+wide_dx
+wide_horizonwide_h0"Mul
+'
+wide_h0
+wide_speed0
+wide_root0"Mul
+%
+wide_dx
+	wide_wave
+wide_step0"Mul
++
+
+wide_step0
+wide_stride0
+wide_foot0"Mul
+%
+wide_dy
+wide_horizonwide_h1"Mul
+'
+wide_h1
+wide_speed1
+wide_root1"Mul
+%
+wide_dy
+	wide_wave
+wide_step1"Mul
++
+
+wide_step1
+wide_stride1
+wide_foot1"Mul
+)
+wide_swing_velocitywide_raised0"Relu
++
+	wide_gate
+wide_raised0wide_gated0"Mul
++
+wide_gated0
+
+wide_lift0wide_ankle0"Mul
+"
+wide_negwavewide_raised1"Relu
++
+	wide_gate
+wide_raised1wide_gated1"Mul
++
+wide_gated1
+
+wide_lift1wide_ankle1"Mul
+l
+
+wide_root0
+
+wide_foot0
+
+wide_root1
+
+wide_foot1
+wide_ankle0
+wide_ankle1wide_motion"Concat*
+axis†
+=
+wide_motion
+wide_locomotion_mapwide_displacement"MatMul
+@
+wide_stance_target
+wide_displacementwide_stepping_pose"Add
+8
+wide_swing_velocity
+	wide_gatewide_active_shift"Mul
+B
+wide_active_shift
+wide_transfer_gainwide_weight_transfer"Mul
+E
+wide_weight_transfer
+wide_transfer_mapwide_lateral_shift"MatMul
+@
+wide_stepping_pose
+wide_lateral_shiftwide_base_targets"Add
+:
+wide_match_duration
+	wide_timewide_strike_elapsed"Sub
+;
+wide_strike_elapsed
+wide_horizonwide_strike_times"Add
+>
+wide_strike_times
+wide_strike_omegawide_strike_phase"Mul
+5
+wide_strike_phase
+wide_twowide_double_phase"Mul
+)
+wide_strike_phasewide_strike_sin"Sin
+)
+wide_strike_phasewide_strike_cos"Cos
+*
+wide_double_phasewide_strike_sin2"Sin
+*
+wide_double_phasewide_strike_cos2"Cos
+7
+wide_strike_phase
+wide_c3_threewide_c3_phase3"Mul
+#
+wide_c3_phase3wide_c3_sin3"Sin
+#
+wide_c3_phase3wide_c3_cos3"Cos
+ä
+wide_strike_sin
+wide_strike_cos
+wide_strike_sin2
+wide_strike_cos2
+wide_c3_sin3
+wide_c3_cos3wide_strike_basis"Concat*
+axis†
+7
+wide_engagement_radius
+	wide_distwide_in_reach"Sub
+;
+wide_in_reach
+wide_engagement_gainwide_reach_gain"Mul
+>
+wide_reach_gain
+	wide_zero
+wide_onewide_strike_gate"Clip
+=
+wide_strike_basis
+wide_strike_gatewide_active_basis"Mul
+F
+wide_active_basis
+wide_trained_wrist_mapwide_wrist_motion"MatMul
+G
+wide_base_targets
+wide_wrist_motionwide_c3p_unpressed_targets"Add
+N
+wide_c3p_unpressed_targets
+wide_c3p_xidx1wide_c3p_x1"Gather*
+axis†
+>
+wide_c3p_x1
+wide_c3p_phase_start1wide_c3p_phase_raw1"Sub
+G
+wide_c3p_phase_raw1
+wide_c3p_phase_scale1wide_c3p_phase_gain1"Mul
+B
+wide_c3p_phase_gain1
+	wide_zero
+wide_onewide_c3p_phase1"Clip
+:
+wide_c3p_phase1
+wide_strike_gatewide_c3p_active1"Mul
+E
+wide_c3p_active1
+wide_c3p_press_gain1wide_c3p_press_wanted1"Mul
+B
+wide_c3p_max_forward1
+wide_c3p_x1wide_c3p_available_raw1"Sub
+4
+wide_c3p_available_raw1wide_c3p_available1"Relu
+K
+wide_c3p_press_wanted1
+wide_c3p_available1wide_c3p_bounded_press1"Min
+S
+wide_c3p_bounded_press1
+wide_c3p_forward_map1wide_c3p_forward_offsets1"MatMul
+J
+wide_c3p_active1
+wide_c3p_height_map1wide_c3p_height_offsets1"MatMul
+N
+wide_c3p_unpressed_targets
+wide_c3p_xidx2wide_c3p_x2"Gather*
+axis†
+>
+wide_c3p_x2
+wide_c3p_phase_start2wide_c3p_phase_raw2"Sub
+G
+wide_c3p_phase_raw2
+wide_c3p_phase_scale2wide_c3p_phase_gain2"Mul
+B
+wide_c3p_phase_gain2
+	wide_zero
+wide_onewide_c3p_phase2"Clip
+:
+wide_c3p_phase2
+wide_strike_gatewide_c3p_active2"Mul
+E
+wide_c3p_active2
+wide_c3p_press_gain2wide_c3p_press_wanted2"Mul
+B
+wide_c3p_max_forward2
+wide_c3p_x2wide_c3p_available_raw2"Sub
+4
+wide_c3p_available_raw2wide_c3p_available2"Relu
+K
+wide_c3p_press_wanted2
+wide_c3p_available2wide_c3p_bounded_press2"Min
+S
+wide_c3p_bounded_press2
+wide_c3p_forward_map2wide_c3p_forward_offsets2"MatMul
+J
+wide_c3p_active2
+wide_c3p_height_map2wide_c3p_height_offsets2"MatMul
+Å
+wide_c3p_forward_offsets1
+wide_c3p_height_offsets1
+wide_c3p_forward_offsets2
+wide_c3p_height_offsets2wide_c3p_offsets"Sum
+K
+wide_c3p_unpressed_targets
+wide_c3p_offsetswide_imitation_targets"Add
+R
+wide_imitation_targets
+wide_rg_hand1_colswide_rg_hand1_x"Gather*
+axis†
+D
+wide_rg_hand1_front
+wide_rg_hand1_xwide_rg_hand1_depth_raw"Sub
+M
+wide_rg_hand1_depth_raw
+wide_rg_hand1_depth_gainwide_rg_hand1_depth"Mul
+F
+wide_rg_hand1_depth
+	wide_zero
+wide_onewide_rg_hand1_return"Clip
+B
+wide_rg_hand1_radius
+wide_nearest_glovewide_rg_hand1_gap"Sub
+S
+wide_rg_hand1_gap
+wide_rg_hand1_threat_gain_gainwide_rg_hand1_threat_gain"Mul
+L
+wide_rg_hand1_threat_gain
+	wide_zero
+wide_onewide_rg_hand1_threat"Clip
+X
+wide_rg_hand1_threat
+wide_rg_hand1_guard_threat_gainwide_rg_hand1_guard_threat"Mul
+V
+wide_rg_hand1_guard_floor
+wide_rg_hand1_guard_threatwide_rg_hand1_base_guard"Add
+M
+wide_rg_hand1_return
+wide_rg_hand1_base_guardwide_rg_hand1_recovery"Mul
+J
+wide_rg_hand1_recovery
+wide_rg_hand1_mapwide_rg_hand1_offsets"MatMul
+R
+wide_imitation_targets
+wide_rg_hand2_colswide_rg_hand2_x"Gather*
+axis†
+D
+wide_rg_hand2_front
+wide_rg_hand2_xwide_rg_hand2_depth_raw"Sub
+M
+wide_rg_hand2_depth_raw
+wide_rg_hand2_depth_gainwide_rg_hand2_depth"Mul
+F
+wide_rg_hand2_depth
+	wide_zero
+wide_onewide_rg_hand2_return"Clip
+B
+wide_rg_hand2_radius
+wide_nearest_glovewide_rg_hand2_gap"Sub
+S
+wide_rg_hand2_gap
+wide_rg_hand2_threat_gain_gainwide_rg_hand2_threat_gain"Mul
+L
+wide_rg_hand2_threat_gain
+	wide_zero
+wide_onewide_rg_hand2_threat"Clip
+X
+wide_rg_hand2_threat
+wide_rg_hand2_guard_threat_gainwide_rg_hand2_guard_threat"Mul
+V
+wide_rg_hand2_guard_floor
+wide_rg_hand2_guard_threatwide_rg_hand2_base_guard"Add
+M
+wide_rg_hand2_return
+wide_rg_hand2_base_guardwide_rg_hand2_recovery"Mul
+J
+wide_rg_hand2_recovery
+wide_rg_hand2_mapwide_rg_hand2_offsets"MatMul
+;
+obs
+wide_rg_lean_colswide_rg_lean"Gather*
+axis†
+>
+wide_rg_lean
+wide_rg_lean_gainswide_rg_lean_drive"MatMul
+,
+wide_rg_lean_drivewide_rg_feedback"Tanh
+H
+wide_rg_feedback
+wide_rg_balance_mapwide_rg_balance_offsets"MatMul
+a
+wide_rg_hand1_offsets
+wide_rg_hand2_offsets
+wide_rg_balance_offsetswide_rg_all_offsets"Sum
+I
+wide_imitation_targets
+wide_rg_all_offsetswide_unturned_targets"Add
+5
+wide_bearing_x
+wide_rear_sectorwide_behind"Less
+0
+wide_bearing_y
+	wide_zerowide_on_right"Less
+@
+wide_on_right
+wide_minus_one
+wide_onewide_turn_side"Where
+I
+wide_behind
+wide_turn_side
+wide_bearing_ywide_heading_signal"Where
+E
+wide_heading_signal
+wide_max_turn_ratewide_desired_yaw_rate"Mul
+D
+obs
+wide_c3_yaw_rate_indexwide_c3_yaw_rate"Gather*
+axis†
+:
+wide_c3_yaw_rate
+wide_c3_yaw_dampingwide_c3_damp"Mul
+<
+wide_desired_yaw_rate
+wide_c3_dampwide_c3_turn_raw"Sub
+J
+wide_c3_turn_raw
+wide_c3_turn_min
+wide_c3_turn_maxwide_c3_turn"Clip
+2
+wide_c3_turn
+wide_horizonwide_yaw_window"Mul
+'
+wide_yaw_windowwide_cos_window"Cos
+:
+wide_cos_window
+wide_angle_shapewide_yaw_cos"Reshape
+'
+wide_yaw_windowwide_sin_window"Sin
+:
+wide_sin_window
+wide_angle_shapewide_yaw_sin"Reshape
+I
+wide_unturned_targets
+wide_vectors_shapewide_target_vectors"Reshape
+F
+wide_target_vectors
+wide_x_lastwide_vector_x"Gather*
+axis†
+F
+wide_target_vectors
+wide_y_lastwide_vector_y"Gather*
+axis†
+F
+wide_target_vectors
+wide_z_lastwide_vector_z"Gather*
+axis†
++
+wide_vector_x
+wide_yaw_coswide_xc"Mul
++
+wide_vector_y
+wide_yaw_sinwide_ys"Mul
+&
+wide_xc
+wide_yswide_turned_x"Sub
++
+wide_vector_x
+wide_yaw_sinwide_xs"Mul
++
+wide_vector_y
+wide_yaw_coswide_yc"Mul
+&
+wide_xs
+wide_ycwide_turned_y"Add
+W
+wide_turned_x
+wide_turned_y
+wide_vector_zwide_turned_vectors"Concat*
+axis†
+C
+wide_turned_vectors
+wide_output_shapewide_target_pose"Reshape
+C
+obs
+low_if2_current_x_ixlow_if2_current_x"Gather*
+axis†
+C
+obs
+low_if2_current_z_ixlow_if2_current_z"Gather*
+axis†
+I
+low_if2_current_z
+low_if2_z_yzx_ixlow_if2_z_yzx"Gather*
+axis†
+I
+low_if2_current_x
+low_if2_x_zxy_ixlow_if2_x_zxy"Gather*
+axis†
+I
+low_if2_current_z
+low_if2_z_zxy_ixlow_if2_z_zxy"Gather*
+axis†
+I
+low_if2_current_x
+low_if2_x_yzx_ixlow_if2_x_yzx"Gather*
+axis†
+4
+low_if2_z_yzx
+low_if2_x_zxylow_if2_cross_a"Mul
+4
+low_if2_z_zxy
+low_if2_x_yzxlow_if2_cross_b"Mul
+:
+low_if2_cross_a
+low_if2_cross_blow_if2_current_y"Sub
+f
+low_if2_current_x
+low_if2_current_y
+low_if2_current_zlow_if2_transpose_flat"Concat*
+axis†
+T
+low_if2_transpose_flat
+low_if2_matrix_shapelow_if2_current_h_transpose"Reshape
+L
+low_if2_current_h_transposelow_if2_current_h"	Transpose*
+perm@ @@†
+C
+obs
+low_if2_peer_flat_ixlow_if2_peer_flat"Gather*
+axis†
+?
+low_if2_peer_flat
+low_if2_peer_shapelow_if2_peer3"Reshape
+D
+low_if2_peer3
+low_if2_current_h_transposelow_if2_peer_h"MatMul
+G
+low_if2_peer_h
+low_if2_peer_flat_shapelow_if2_peer_h_flat"Reshape
+G
+obs
+low_if2_own_history_ixlow_if2_own_history"Gather*
+axis†
+;
+obs
+low_if2_clock_ixlow_if2_clock"Gather*
+axis†
+]
+low_if2_own_history
+low_if2_peer_h_flat
+low_if2_clocklow_if2_obs_h"Concat*
+axis†
+B
+low_state_gains_flat_sizelow_state_gains_zero"ConstantOfShape
+f
+low_state_gains_zero
+low_state_gains_index
+low_state_gains_valueslow_state_gains_flat"	ScatterND
+G
+low_state_gains_flat
+low_state_gains_shapelow_state_gains"Reshape
+L
+low_support_response_flat_sizelow_support_response_zero"ConstantOfShape
+z
+low_support_response_zero
+low_support_response_index
+low_support_response_valueslow_support_response_flat"	ScatterND
+V
+low_support_response_flat
+low_support_response_shapelow_support_response"Reshape
+H
+low_locomotion_map_flat_sizelow_locomotion_map_zero"ConstantOfShape
+r
+low_locomotion_map_zero
+low_locomotion_map_index
+low_locomotion_map_valueslow_locomotion_map_flat"	ScatterND
+P
+low_locomotion_map_flat
+low_locomotion_map_shapelow_locomotion_map"Reshape
+D
+low_transfer_map_flat_sizelow_transfer_map_zero"ConstantOfShape
+j
+low_transfer_map_zero
+low_transfer_map_index
+low_transfer_map_valueslow_transfer_map_flat"	ScatterND
+J
+low_transfer_map_flat
+low_transfer_map_shapelow_transfer_map"Reshape
+E
+low_if2_obs_h
+low_state_gains
+
+low_offsetlow_balance_error"Gemm
+,
+low_balance_errorlow_bounded_error"Tanh
+N
+low_bounded_error
+low_support_response
+
+low_stancelow_stance_target"Gemm
+B
+low_if2_obs_h
+low_peer_x_index
+low_peer_x"Gather*
+axis†
+B
+low_if2_obs_h
+low_peer_y_index
+low_peer_y"Gather*
+axis†
+>
+low_if2_obs_h
+low_time_indexlow_time"Gather*
+axis†
+%
+
+low_peer_x
+
+low_peer_xlow_x2"Mul
+%
+
+low_peer_y
+
+low_peer_ylow_y2"Mul
+
+low_x2
+low_y2low_d2"Add
+#
+low_d2
+low_epslow_d2_safe"Add
+
+low_d2_safelow_dist"Sqrt
+=
+low_if2_obs_h
+low_self_vx_idxlow_vx"Gather*
+axis†
+=
+low_if2_obs_h
+low_self_vy_idxlow_vy"Gather*
+axis†
+"
+low_vx
+
+low_peer_xlow_vxx"Mul
+"
+low_vy
+
+low_peer_ylow_vyy"Mul
+#
+low_vxx
+low_vyy
+low_vr_sum"Add
+#
+
+low_vr_sum
+low_distlow_vr"Div
+
+low_vrlow_bounded_vr"Tanh
+:
+low_bounded_vr
+low_lookaheadlow_projected_motion"Mul
+8
+low_dist
+low_projected_motionlow_projected_gap"Sub
+R
+low_if2_obs_h
+low_obstacle_pelvis_idxlow_obstacle_pelvis"Gather*
+axis†
+H
+low_if2_obs_h
+low_left_glove_idxlow_left_glove"Gather*
+axis†
+J
+low_if2_obs_h
+low_right_glove_idxlow_right_glove"Gather*
+axis†
+F
+low_if2_obs_h
+low_left_foot_idxlow_left_foot"Gather*
+axis†
+H
+low_if2_obs_h
+low_right_foot_idxlow_right_foot"Gather*
+axis†
+2
+low_left_foot
+low_right_footlow_feet_sum"Add
+8
+low_feet_sum
+low_foot_term_factorlow_foot_term"Mul
+6
+low_left_glove
+low_right_glovelow_gloves_sum"Add
+<
+low_gloves_sum
+low_glove_term_factorlow_glove_term"Mul
+C
+low_obstacle_pelvis
+low_pelvis_term_factorlow_pelvis_term"Mul
+D
+low_pelvis_term
+low_foot_term
+low_glove_termlow_footprint"Sum
+A
+low_footprint
+low_footprintlow_footprint_radius_squares"Mul
+h
+low_footprint_radius_squares
+low_review_xy_axislow_footprint_radius_sum"	ReduceSum*
+keepdims†
+J
+low_footprint_radius_sum
+low_eps low_footprint_radius_regularized"Add
+>
+ low_footprint_radius_regularizedlow_footprint_radius"Sqrt
+A
+low_footprint
+low_footprint_radiuslow_footprint_bearing"Div
+>
+low_left_glove
+low_left_glovelow_left_radius_squares"Mul
+^
+low_left_radius_squares
+low_review_xy_axislow_left_radius_sum"	ReduceSum*
+keepdims†
+@
+low_left_radius_sum
+low_epslow_left_radius_regularized"Add
+4
+low_left_radius_regularizedlow_left_radius"Sqrt
+A
+low_right_glove
+low_right_glovelow_right_radius_squares"Mul
+`
+low_right_radius_squares
+low_review_xy_axislow_right_radius_sum"	ReduceSum*
+keepdims†
+B
+low_right_radius_sum
+low_epslow_right_radius_regularized"Add
+6
+low_right_radius_regularizedlow_right_radius"Sqrt
+;
+low_left_radius
+low_right_radiuslow_nearest_glove"Min
+8
+low_dist
+low_nearest_glovelow_glove_protrusion"Sub
+B
+low_glove_protrusion
+low_glove_allowancelow_excess_glove"Sub
+-
+low_excess_glovelow_extra_proximity"Relu
+U
+low_extra_proximity
+low_proximity_adjustment_factorlow_proximity_adjustment"Mul
+E
+low_projected_gap
+low_proximity_adjustmentlow_near_estimate"Sub
+?
+low_inner_distance
+low_near_estimatelow_inside_margin"Sub
+@
+low_projected_gap
+low_outer_distancelow_outside_margin"Sub
+E
+low_inside_margin
+low_near_strength_factorlow_near_strength"Mul
+<
+low_near_strength
+low_zero
+low_onelow_need_space"Clip
+D
+low_outside_margin
+low_far_strength_factorlow_far_strength"Mul
+=
+low_far_strength
+low_zero
+low_onelow_room_to_move"Clip
+Q
+low_if2_obs_h
+low_r3_old_root_indiceslow_r3_old_root_xy"Gather*
+axis†
+E
+low_r3_old_root_xy
+low_footprint_bearinglow_r3_travel_parts"Mul
+Y
+low_r3_travel_parts
+low_review_xy_axislow_r3_past_radial"	ReduceSum*
+keepdims†
+1
+low_r3_past_radiallow_r3_negative_travel"Neg
+/
+low_r3_negative_travellow_r3_approach"Relu
+;
+low_r3_approach
+low_r3_preview_gainlow_r3_preview"Mul
+O
+low_r3_preview
+low_zero
+low_r3_preview_limitlow_r3_approach_preview"Clip
+9
+low_dist
+low_r3_approach_previewlow_r3_safe_gap"Sub
+>
+low_r3_onset
+low_r3_safe_gaplow_r3_compression_depth"Sub
+V
+low_r3_compression_depth
+low_r3_compression_gain_gainlow_r3_compression_gain"Mul
+F
+low_r3_compression_gain
+low_zero
+low_onelow_r3_compression"Clip
+7
+low_r3_compressionlow_r3_compression_activity"Sqrt
+I
+low_r3_past_radial
+low_r3_retreat_deadbandlow_r3_retreat_excess"Sub
+Q
+low_r3_retreat_excess
+low_r3_retreat_history_gainlow_r3_retreat_history"Mul
+H
+low_r3_retreat_history
+low_zero
+low_onelow_r3_recent_retreat"Clip
+5
+low_r3_release
+low_distlow_r3_release_depth"Sub
+L
+low_r3_release_depth
+low_r3_release_scale_gainlow_r3_release_scale"Mul
+F
+low_r3_release_scale
+low_zero
+low_onelow_r3_inside_release"Clip
+A
+low_r3_recent_retreat
+low_r3_inside_releaselow_r3_carry"Mul
+F
+low_r3_carry
+low_r3_carried_escape_gainlow_r3_carried_escape"Mul
+H
+low_r3_compression_activity
+low_r3_carried_escapelow_r3_escape"Max
+O
+low_r3_compression_activity
+low_r3_active_gait_gainlow_r3_active_gait"Mul
+B
+low_r3_carry
+low_r3_carried_gait_gainlow_r3_carried_gait"Mul
+C
+low_r3_active_gait
+low_r3_carried_gaitlow_r3_minimum_gait"Max
+X
+low_need_space
+low_room_to_move
+low_minimum_step
+low_r3_minimum_gaitlow_gate"Max
+>
+low_room_to_move
+low_far_radial_factorlow_far_radial"Mul
+>
+low_need_space
+low_near_radial_factorlow_near_radial"Mul
+:
+low_far_radial
+low_near_radiallow_radial_command"Sub
+@
+low_need_space
+low_near_lateral_factorlow_near_lateral"Mul
+@
+low_room_to_move
+low_far_lateral_factorlow_far_lateral"Mul
+?
+low_near_lateral
+low_far_laterallow_requested_tangent"Add
+C
+low_requested_tangent
+low_minimum_steplow_lateral_command"Max
+I
+low_footprint_bearing
+low_x_columnlow_bearing_x"Gather*
+axis†
+I
+low_footprint_bearing
+low_y_columnlow_bearing_y"Gather*
+axis†
+9
+low_r3_safe_gap
+low_r3_onsetlow_r3_cap_distance"Sub
+C
+low_r3_cap_distance
+low_r3_cap_slope_gainlow_r3_cap_slope"Mul
+Y
+low_r3_compression_activity
+low_r3_retreat_variable_gainlow_r3_retreat_variable"Mul
+M
+low_r3_retreat_base
+low_r3_retreat_variablelow_r3_retreat_magnitude"Add
+8
+low_r3_retreat_magnitudelow_r3_negative_retreat"Neg
+C
+low_r3_cap_slope
+low_r3_negative_retreatlow_r3_radial_cap"Max
+;
+low_radial_command
+low_r3_radial_caplow_r3_radial"Min
+G
+low_r3_escape
+low_r3_escape_lateral_gainlow_r3_escape_lateral"Mul
+A
+low_lateral_command
+low_r3_escape_laterallow_r3_lateral"Add
+1
+low_r3_radial
+low_bearing_xlow_radial_x"Mul
+3
+low_r3_lateral
+low_bearing_ylow_lateral_x"Mul
+*
+low_radial_x
+low_lateral_xlow_dx"Add
+1
+low_r3_radial
+low_bearing_ylow_radial_y"Mul
+3
+low_r3_lateral
+low_bearing_xlow_lateral_y"Mul
+*
+low_radial_y
+low_lateral_ylow_dy"Sub
+)
+low_time
+low_frequency	low_phase"Mul
+;
+	low_phase
+low_future_phaselow_future_phase_values"Add
+(
+low_future_phase_valueslow_wave"Sin
+2
+low_future_phase_valueslow_swing_velocity"Cos
+&
+low_swing_velocitylow_negwave"Neg
+"
+low_dx
+low_horizonlow_h0"Mul
+$
+low_h0
+
+low_speed0	low_root0"Mul
+"
+low_dx
+low_wave	low_step0"Mul
+(
+	low_step0
+low_stride0	low_foot0"Mul
+"
+low_dy
+low_horizonlow_h1"Mul
+$
+low_h1
+
+low_speed1	low_root1"Mul
+"
+low_dy
+low_wave	low_step1"Mul
+(
+	low_step1
+low_stride1	low_foot1"Mul
+'
+low_swing_velocitylow_raised0"Relu
+(
+low_gate
+low_raised0
+low_gated0"Mul
+(
+
+low_gated0
+	low_lift0
+low_ankle0"Mul
+ 
+low_negwavelow_raised1"Relu
+(
+low_gate
+low_raised1
+low_gated1"Mul
+(
+
+low_gated1
+	low_lift1
+low_ankle1"Mul
+e
+	low_root0
+	low_foot0
+	low_root1
+	low_foot1
+
+low_ankle0
+
+low_ankle1
+low_motion"Concat*
+axis†
+:
+
+low_motion
+low_locomotion_maplow_displacement"MatMul
+=
+low_stance_target
+low_displacementlow_stepping_pose"Add
+5
+low_swing_velocity
+low_gatelow_active_shift"Mul
+?
+low_active_shift
+low_transfer_gainlow_weight_transfer"Mul
+B
+low_weight_transfer
+low_transfer_maplow_lateral_shift"MatMul
+=
+low_stepping_pose
+low_lateral_shiftlow_base_targets"Add
+7
+low_match_duration
+low_timelow_strike_elapsed"Sub
+8
+low_strike_elapsed
+low_horizonlow_strike_times"Add
+;
+low_strike_times
+low_strike_omegalow_strike_phase"Mul
+2
+low_strike_phase
+low_twolow_double_phase"Mul
+'
+low_strike_phaselow_strike_sin"Sin
+'
+low_strike_phaselow_strike_cos"Cos
+(
+low_double_phaselow_strike_sin2"Sin
+(
+low_double_phaselow_strike_cos2"Cos
+i
+low_strike_sin
+low_strike_cos
+low_strike_sin2
+low_strike_cos2low_strike_basis"Concat*
+axis†
+4
+low_engagement_radius
+low_distlow_in_reach"Sub
+8
+low_in_reach
+low_engagement_gainlow_reach_gain"Mul
+:
+low_reach_gain
+low_zero
+low_onelow_strike_gate"Clip
+:
+low_strike_basis
+low_strike_gatelow_active_basis"Mul
+C
+low_active_basis
+low_trained_wrist_maplow_wrist_motion"MatMul
+@
+low_base_targets
+low_wrist_motionlow_imitation_targets"Add
+O
+low_imitation_targets
+low_rg_hand1_colslow_rg_hand1_x"Gather*
+axis†
+A
+low_rg_hand1_front
+low_rg_hand1_xlow_rg_hand1_depth_raw"Sub
+J
+low_rg_hand1_depth_raw
+low_rg_hand1_depth_gainlow_rg_hand1_depth"Mul
+B
+low_rg_hand1_depth
+low_zero
+low_onelow_rg_hand1_return"Clip
+?
+low_rg_hand1_radius
+low_nearest_glovelow_rg_hand1_gap"Sub
+P
+low_rg_hand1_gap
+low_rg_hand1_threat_gain_gainlow_rg_hand1_threat_gain"Mul
+H
+low_rg_hand1_threat_gain
+low_zero
+low_onelow_rg_hand1_threat"Clip
+U
+low_rg_hand1_threat
+low_rg_hand1_guard_threat_gainlow_rg_hand1_guard_threat"Mul
+S
+low_rg_hand1_guard_floor
+low_rg_hand1_guard_threatlow_rg_hand1_base_guard"Add
+J
+low_rg_hand1_return
+low_rg_hand1_base_guardlow_rg_hand1_recovery"Mul
+G
+low_rg_hand1_recovery
+low_rg_hand1_maplow_rg_hand1_offsets"MatMul
+O
+low_imitation_targets
+low_rg_hand2_colslow_rg_hand2_x"Gather*
+axis†
+A
+low_rg_hand2_front
+low_rg_hand2_xlow_rg_hand2_depth_raw"Sub
+J
+low_rg_hand2_depth_raw
+low_rg_hand2_depth_gainlow_rg_hand2_depth"Mul
+B
+low_rg_hand2_depth
+low_zero
+low_onelow_rg_hand2_return"Clip
+?
+low_rg_hand2_radius
+low_nearest_glovelow_rg_hand2_gap"Sub
+P
+low_rg_hand2_gap
+low_rg_hand2_threat_gain_gainlow_rg_hand2_threat_gain"Mul
+H
+low_rg_hand2_threat_gain
+low_zero
+low_onelow_rg_hand2_threat"Clip
+U
+low_rg_hand2_threat
+low_rg_hand2_guard_threat_gainlow_rg_hand2_guard_threat"Mul
+S
+low_rg_hand2_guard_floor
+low_rg_hand2_guard_threatlow_rg_hand2_base_guard"Add
+J
+low_rg_hand2_return
+low_rg_hand2_base_guardlow_rg_hand2_recovery"Mul
+G
+low_rg_hand2_recovery
+low_rg_hand2_maplow_rg_hand2_offsets"MatMul
+C
+low_if2_obs_h
+low_rg_lean_colslow_rg_lean"Gather*
+axis†
+;
+low_rg_lean
+low_rg_lean_gainslow_rg_lean_drive"MatMul
+*
+low_rg_lean_drivelow_rg_feedback"Tanh
+E
+low_rg_feedback
+low_rg_balance_maplow_rg_balance_offsets"MatMul
+]
+low_rg_hand1_offsets
+low_rg_hand2_offsets
+low_rg_balance_offsetslow_rg_all_offsets"Sum
+F
+low_imitation_targets
+low_rg_all_offsetslow_unturned_targets"Add
+2
+low_bearing_x
+low_rear_sector
+low_behind"Less
+-
+low_bearing_y
+low_zerolow_on_right"Less
+<
+low_on_right
+low_minus_one
+low_onelow_turn_side"Where
+E
+
+low_behind
+low_turn_side
+low_bearing_ylow_heading_signal"Where
+B
+low_heading_signal
+low_max_turn_ratelow_desired_yaw_rate"Mul
+8
+low_desired_yaw_rate
+low_horizonlow_yaw_window"Mul
+%
+low_yaw_windowlow_cos_window"Cos
+7
+low_cos_window
+low_angle_shapelow_yaw_cos"Reshape
+%
+low_yaw_windowlow_sin_window"Sin
+7
+low_sin_window
+low_angle_shapelow_yaw_sin"Reshape
+L
+low_if2_obs_h
+low_if_ankle_idxlow_if_ankle_heights"Gather*
+axis†
+S
+low_if_ankle_heightslow_if_mean_ankle"
+ReduceMean*
+axes@†*
+keepdims†
+E
+low_if_ankle_ground
+low_if_mean_anklelow_if_height_estimate"Sub
+K
+low_if_height_floor
+low_if_height_estimatelow_if_height_error_raw"Sub
+J
+low_if_height_error_raw
+low_if_height_error_klow_if_height_error"Mul
+i
+low_if_height_error
+low_if_height_recovery_lo
+low_if_height_recovery_hilow_if_height_recovery"Clip
+F
+low_if2_obs_h
+low_if_peer_z_idxlow_if_peer_z"Gather*
+axis†
+>
+low_if_peer_z
+low_if_torso_offsetlow_if_torso_height"Add
+i
+low_if_torso_height
+low_if_desired_wrist_z_lo
+low_if_desired_wrist_z_hilow_if_desired_wrist_z"Clip
+B
+low_if_desired_wrist_z
+low_if_wrist_meanlow_if_aim_delta"Sub
+=
+low_if_aim_delta
+low_if_aim_blend_klow_if_aim_blend"Mul
+W
+low_if_aim_blend
+low_if_aim_offset_lo
+low_if_aim_offset_hilow_if_aim_offset"Clip
+L
+low_if_height_recovery
+low_if_recover_maplow_if_recover_targets"MatMul
+?
+low_if_aim_offset
+low_if_aim_maplow_if_aim_targets"MatMul
+D
+low_if_recover_targets
+low_if_aim_targetslow_if_correction"Sum
+G
+low_unturned_targets
+low_if_correctionlow_if_adjusted_targets"Add
+4
+low_if3_far_limit
+low_distlow_if3_near_gap"Sub
+D
+low_if3_near_gap
+low_if3_near_scale_gainlow_if3_near_scale"Mul
+J
+low_if3_near_scale
+low_if3_near_lo
+low_if3_near_hilow_if3_near"Clip
+9
+low_dist
+low_if3_too_closelow_if3_clearance_gap"Sub
+S
+low_if3_clearance_gap
+low_if3_clearance_scale_gainlow_if3_clearance_scale"Mul
+^
+low_if3_clearance_scale
+low_if3_clearance_lo
+low_if3_clearance_hilow_if3_clearance"Clip
+C
+low_bearing_x
+low_if3_minimum_facinglow_if3_facing_margin"Sub
+M
+low_if3_facing_margin
+low_if3_facing_scale_gainlow_if3_facing_scale"Mul
+R
+low_if3_facing_scale
+low_if3_facing_lo
+low_if3_facing_hilow_if3_facing"Clip
+:
+low_if3_near
+low_if3_clearancelow_if3_range_gate"Mul
+=
+low_if3_range_gate
+low_if3_facinglow_if3_depth_gate"Mul
+S
+low_if_adjusted_targets
+low_if3_hand1_idxlow_if3_hand1_xs"Gather*
+axis†
+A
+low_if3_hand1_xs
+low_if3_hand1_onsetlow_if3_hand1_phase"Sub
+U
+low_if3_hand1_phase
+low_if3_hand1_phase_scale_gainlow_if3_hand1_phase_scale"Mul
+r
+low_if3_hand1_phase_scale
+low_if3_hand1_extension_lo
+low_if3_hand1_extension_hilow_if3_hand1_extension"Clip
+G
+low_if3_hand1_extension
+low_if3_depth_gatelow_if3_hand1_depth"Mul
+K
+low_if3_hand1_depth
+low_if3_hand1_maplow_if3_hand1_penetration"MatMul
+S
+low_if_adjusted_targets
+low_if3_hand2_idxlow_if3_hand2_xs"Gather*
+axis†
+A
+low_if3_hand2_xs
+low_if3_hand2_onsetlow_if3_hand2_phase"Sub
+U
+low_if3_hand2_phase
+low_if3_hand2_phase_scale_gainlow_if3_hand2_phase_scale"Mul
+r
+low_if3_hand2_phase_scale
+low_if3_hand2_extension_lo
+low_if3_hand2_extension_hilow_if3_hand2_extension"Clip
+G
+low_if3_hand2_extension
+low_if3_depth_gatelow_if3_hand2_depth"Mul
+K
+low_if3_hand2_depth
+low_if3_hand2_maplow_if3_hand2_penetration"MatMul
+m
+low_if_adjusted_targets
+low_if3_hand1_penetration
+low_if3_hand2_penetrationlow_if3_contact_targets"Sum
+I
+low_if3_contact_targets
+low_vectors_shapelow_target_vectors"Reshape
+C
+low_target_vectors
+
+low_x_lastlow_vector_x"Gather*
+axis†
+C
+low_target_vectors
+
+low_y_lastlow_vector_y"Gather*
+axis†
+C
+low_target_vectors
+
+low_z_lastlow_vector_z"Gather*
+axis†
+(
+low_vector_x
+low_yaw_coslow_xc"Mul
+(
+low_vector_y
+low_yaw_sinlow_ys"Mul
+#
+low_xc
+low_yslow_turned_x"Sub
+(
+low_vector_x
+low_yaw_sinlow_xs"Mul
+(
+low_vector_y
+low_yaw_coslow_yc"Mul
+#
+low_xs
+low_yclow_turned_y"Add
+S
+low_turned_x
+low_turned_y
+low_vector_zlow_turned_vectors"Concat*
+axis†
+A
+low_turned_vectors
+low_output_shapelow_if2_output_h"Reshape
+D
+low_if2_output_h
+low_if2_vector_shapelow_if2_vectors_h"Reshape
+E
+low_if2_current_h
+low_if2_matrix4_shapelow_if2_matrix_h"Reshape
+@
+low_if2_vectors_h
+low_if2_matrix_hlow_if2_vectors_p"MatMul
+?
+low_if2_vectors_p
+low_output_shapelow_target_pose"Reshape
+8
+obs
+mix_root_x0_idxmix_root_x0"Gather*
+axis†
+8
+obs
+mix_root_x1_idxmix_root_x1"Gather*
+axis†
+8
+obs
+mix_root_x2_idxmix_root_x2"Gather*
+axis†
+8
+obs
+mix_root_z0_idxmix_root_z0"Gather*
+axis†
+8
+obs
+mix_root_z1_idxmix_root_z1"Gather*
+axis†
+8
+obs
+mix_root_z2_idxmix_root_z2"Gather*
+axis†
+*
+mix_root_z0
+mix_root_x1	mix_zx_xy"Mul
+*
+mix_root_z1
+mix_root_x0	mix_zy_xx"Mul
+(
+	mix_zx_xy
+	mix_zy_xxmix_root_yz"Sub
+4
+obs
+mix_peer0_idx	mix_peer0"Gather*
+axis†
+4
+obs
+mix_peer1_idx	mix_peer1"Gather*
+axis†
+4
+obs
+mix_peer2_idx	mix_peer2"Gather*
+axis†
+*
+	mix_peer0
+mix_root_x2mix_peer_xz"Mul
+*
+	mix_peer1
+mix_root_yzmix_peer_yz"Mul
+*
+	mix_peer2
+mix_root_z2mix_peer_zz"Mul
+G
+mix_peer_xz
+mix_peer_yz
+mix_peer_zzmix_relative_world_height"Sum
+B
+obs
+mix_left_ankle_z_idxmix_left_ankle_z"Gather*
+axis†
+D
+obs
+mix_right_ankle_z_idxmix_right_ankle_z"Gather*
+axis†
+<
+mix_left_ankle_z
+mix_right_ankle_zmix_ground_ankle"Min
+:
+mix_ankle_floor_m
+mix_ground_anklemix_own_height"Sub
+A
+mix_own_height
+mix_relative_world_heightmix_peer_height"Add
+E
+mix_standing_threshold_m
+mix_peer_heightmix_below_threshold"Sub
+D
+mix_below_threshold
+mix_transition_width_mmix_low_fraction"Div
+5
+mix_low_fraction
+mix_zero
+mix_onemix_gate"Clip
++
+mix_one
+mix_gatemix_high_fraction"Sub
+2
+low_target_pose
+mix_gatemix_weighted_low"Mul
+=
+wide_target_pose
+mix_high_fractionmix_weighted_wide"Mul
+8
+mix_weighted_low
+mix_weighted_widemix_raw_pose"Add
+1
+mix_raw_pose
+mix_pose_shapemix_pose"Reshape
+?
+mix_pose
+mix_position_idxmix_position"Gather*
+axis†
+;
+mix_pose
+mix_axis_x_idx
+mix_axis_x"Gather*
+axis†
+;
+mix_pose
+mix_axis_z_idx
+mix_axis_z"Gather*
+axis†
+,
+
+mix_axis_x
+
+mix_axis_xmix_x_squared"Mul
+@
+mix_x_squared
+mix_axis	mix_x_sum"	ReduceSum*
+keepdims†
+%
+	mix_x_sum
+mix_eps
+mix_x_safe"Max
+
+
+mix_x_safe
+mix_x_norm"Sqrt
+)
+
+mix_axis_x
+
+mix_x_norm
+mix_x_unit"Div
+-
+
+mix_x_unit
+
+mix_axis_zmix_xz_product"Mul
+B
+mix_xz_product
+mix_axis
+mix_xz_dot"	ReduceSum*
+keepdims†
+)
+
+mix_x_unit
+
+mix_xz_dot
+mix_z_on_x"Mul
+/
+
+mix_axis_z
+
+mix_z_on_xmix_orthogonal_z"Sub
+8
+mix_orthogonal_z
+mix_orthogonal_zmix_z_squared"Mul
+@
+mix_z_squared
+mix_axis	mix_z_sum"	ReduceSum*
+keepdims†
+%
+	mix_z_sum
+mix_eps
+mix_z_safe"Max
+
+
+mix_z_safe
+mix_z_norm"Sqrt
+/
+mix_orthogonal_z
+
+mix_z_norm
+mix_z_unit"Div
+R
+mix_position
+
+mix_x_unit
+
+mix_z_unitmix_normalized_points"Concat*
+axis†
+E
+mix_normalized_points
+mix_flat_shapemix_normalized_pose"Reshape
+)
+mix_gate
+mix_onemix_fully_low"Equal
+L
+mix_fully_low
+low_target_pose
+mix_normalized_posemix_low_or_mix"Where
++
+mix_gate
+mix_zeromix_fully_wide"Equal
+F
+mix_fully_wide
+wide_target_pose
+mix_low_or_mixtarget_pose"Where(height_conditioned_attack_and_low_stance*+Bwide_offsetJ        .ül<s?^º        *ô·Bwide_stanceJÑ              Ä?                  Ä?á-à>ÊË[>Qÿb>ŸR?cÆ?%#d>=Z >ø˛?L?Í≥¿>$B	æj1ç>ô¨e?øº>]π◊>`ìæì$f?g ©>pa+∫2ö">:ç%ø¯∆?e)=Sõ±;$HØª&YÔ∫Ù˛?“∆Aª4!æX‹%øí‹?t¥Ωéß‡;âËª}öÒªë¸?              Ä?                  Ä?á-à>ÊË[>Qÿb>ŸR?cÆ?%#d>=Z >ø˛?L?Í≥¿>$B	æj1ç>ô¨e?øº>]π◊>`ìæì$f?g ©>pa+∫2ö">:ç%ø¯∆?e)=Sõ±;$HØª&YÔ∫Ù˛?“∆Aª4!æX‹%øí‹?t¥Ωéß‡;âËª}öÒªë¸?              Ä?                  Ä?á-à>ÊË[>Qÿb>ŸR?cÆ?%#d>=Z >ø˛?L?Í≥¿>$B	æj1ç>ô¨e?øº>]π◊>`ìæì$f?g ©>pa+∫2ö">:ç%ø¯∆?e)=Sõ±;$HØª&YÔ∫Ù˛?“∆Aª4!æX‹%øí‹?t¥Ωéß‡;âËª}öÒªë¸?              Ä?                  Ä?á-à>ÊË[>Qÿb>ŸR?cÆ?%#d>=Z >ø˛?L?Í≥¿>$B	æj1ç>ô¨e?øº>]π◊>`ìæì$f?g ©>pa+∫2ö">:ç%ø¯∆?e)=Sõ±;$HØª&YÔ∫Ù˛?“∆Aª4!æX‹%øí‹?t¥Ωéß‡;âËª}öÒªë¸?              Ä?                  Ä?á-à>ÊË[>Qÿb>ŸR?cÆ?%#d>=Z >ø˛?L?Í≥¿>$B	æj1ç>ô¨e?øº>]π◊>`ìæì$f?g ©>pa+∫2ö">:ç%ø¯∆?e)=Sõ±;$HØª&YÔ∫Ù˛?“∆Aª4!æX‹%øí‹?t¥Ωéß‡;âËª}öÒªë¸?*!Bwide_peer_x_indexJ8      *!Bwide_peer_y_indexJ9      *Bwide_time_indexJG      *Bwide_epsJ∑—8*B	wide_zeroJ    *Bwide_oneJ  Ä?*Bwide_frequencyJ≥√¿*/Bwide_future_phaseJt£˘=t£y>ó:ª>t£˘>)?**Bwide_horizonJ
+◊£<
+◊#=è¬u=
+◊£=ÕÃÃ=*Bwide_speed0Jì„&?*Bwide_stride0J∏>*Bwide_speed1Jì„&?*Bwide_stride1J∏>*B
+wide_lift0Jò/Ø=*B
+wide_lift1Jò/Ø=*Bwide_transfer_gainJu^cΩ* Bwide_self_vx_idxJ¸      * Bwide_self_vy_idxJ˝      *Bwide_lookaheadJè¬u>**Bwide_state_gains_flat_sizeJ∂      *.Bwide_state_gains_shapeJI             *ÄBwide_state_gains_indexJ`ÿ      ﬂ      `      g      ¸      	      ~      Ö      ¥      ª      Ë      Ô      *OBwide_state_gains_valuesJ0è¬uæè¬uæöôøöôøÕÃL¿ÕÃL@  Ä@  Ä@  Ä@  Ä@Æ«øÆ«ø*/Bwide_support_response_flat_sizeJF      *3Bwide_support_response_shapeJ       ·       *ˆZBwide_support_response_indexJ–        	                     $       -       6       ?       H       Q       Z       c       l       u       ~       á       ê       ô       ¢       ´       ¥       Ω       ∆       œ       ÿ       ‚       Î       Ù       ˝                         !      *      3      <      E      N      W      `      i      r      {      Ñ      ç      ñ      ü      ®      ±      ∫      ¬      À      ‘      Ô      ¯                  %      .      I      R      [      v            à      §      ≠      ∂      —      ⁄      „      ˛                  +      4      =      X      a      j      Ñ      ±      ﬁ            8      f      ì      ¿      Ì            *çZBwide_support_response_valuesJËˇx/=Ÿ&=Ÿ&=uÄºuÄº?W[=èp:=èp:=S'†ºS'†ºøöÉ=E∫_=E∫_=//¿º//¿º‡âô=˛ÅÇ=˛ÅÇ=7‡º7‡ºˇxØ=Ÿ&ï=Ÿ&ï=u Ωu Ωˇx/=Ÿ&=Ÿ&=uÄºuÄº?W[=èp:=èp:=S'†ºS'†ºøöÉ=E∫_=E∫_=//¿º//¿º‡âô=˛ÅÇ=˛ÅÇ=7‡º7‡ºˇxØ=Ÿ&ï=Ÿ&ï=u Ωu Ω\èB=B`%=B`%=33s=R∏N=R∏N=ÖÎë=bx=bx=q=™=9¥ê=9¥ê=\è¬=B`•=B`•=\èB=B`%=B`%=33s=R∏N=R∏N=ÖÎë=bx=bx=q=™=9¥ê=9¥ê=\è¬=B`•=B`•=„•õº\è¬º’xÈº'1Ω„•Ω„•õº\è¬º’xÈº'1Ω„•Ω*-Bwide_locomotion_map_flat_sizeJ^      *1Bwide_locomotion_map_shapeJ       ·       *§PBwide_locomotion_map_indexJÄ        	                     $                          )      2            %      .      7      @      *      3      <      E      N      8      A      J      S      \      Ä      â      é      ó      ú      •      ™      ≥      ∏      ¡      À      ‘      ›      Ê      Ô      Ÿ	      ‚	      Î	      Ù	      ˝	      Á
+      
+      ˘
+                  ı      ˛                                                '      K      T      Y      b      g      p      u      ~      É      å      ±      ø      Õ      €      È            -      ;      I      W      *„PBwide_locomotion_map_valuesJ¿  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?*+Bwide_transfer_map_flat_sizeJe      */Bwide_transfer_map_shapeJ       ·       *ôBwide_transfer_map_indexJx       
+                          !            &      /      +      4      =      9      B      K      *\Bwide_transfer_map_valuesJ<  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?*#Bwide_review_xy_axisJ       *0Bwide_obstacle_pelvis_idxJ8      9      *+Bwide_left_glove_idxJ;      <      *,Bwide_right_glove_idxJ>      ?      **Bwide_left_foot_idxJA      B      *+Bwide_right_foot_idxJD      E      *Bwide_foot_term_factorJ∏>* Bwide_glove_term_factorJ)\è=*!Bwide_pelvis_term_factorJöô?*Bwide_glove_allowanceJÆGa>**B wide_proximity_adjustment_factorJffÊ>*Bwide_inner_distanceJÖÎ—>*Bwide_outer_distanceJ·z?*#Bwide_near_strength_factorJ33@*"Bwide_far_strength_factorJ   @* Bwide_far_radial_factorJöôô?*!Bwide_near_radial_factorJÏQ8>*"Bwide_near_lateral_factorJè¬ı=*!Bwide_far_lateral_factorJÕÃÃ<*Bwide_x_columnJ        *Bwide_y_columnJ       *Bwide_match_durationJ  pB*Bwide_strike_omegaJJT-A*Bwide_twoJ   @* Bwide_engagement_radiusJff¶?*Bwide_engagement_gainJ   @*õ”·Bwide_trained_wrist_mapJ¯“                                    ä<TΩ‰}ﬁ<?≥Ω                        ÊÓÃ=–dy=ÂK`º                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ä<TΩ‰}ﬁ<?≥Ω                        ÊÓÃ=–dy=ÂK`º                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ä<TΩ‰}ﬁ<?≥Ω                        ÊÓÃ=–dy=ÂK`º                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ä<TΩ‰}ﬁ<?≥Ω                        ÊÓÃ=–dy=ÂK`º                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ä<TΩ‰}ﬁ<?≥Ω                        ÊÓÃ=–dy=ÂK`º                                                                                                                                    ïVã>AÅPæ6∂;                        V≥æ—&HæÎÆÅΩ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ïVã>AÅPæ6∂;                        V≥æ—&HæÎÆÅΩ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ïVã>AÅPæ6∂;                        V≥æ—&HæÎÆÅΩ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ïVã>AÅPæ6∂;                        V≥æ—&HæÎÆÅΩ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ïVã>AÅPæ6∂;                        V≥æ—&HæÎÆÅΩ                                                                                                                                    i:ΩT:N<ÒÛ†Ω                        â+P=:;=Tqº                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        i:ΩT:N<ÒÛ†Ω                        â+P=:;=Tqº                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        i:ΩT:N<ÒÛ†Ω                        â+P=:;=Tqº                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        i:ΩT:N<ÒÛ†Ω                        â+P=:;=Tqº                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        i:ΩT:N<ÒÛ†Ω                        â+P=:;=Tqº                                                                                                                                    ß^4=î¿ΩD}í<                        q·eΩ«≤]<⁄Æs<                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ß^4=î¿ΩD}í<                        q·eΩ«≤]<⁄Æs<                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ß^4=î¿ΩD}í<                        q·eΩ«≤]<⁄Æs<                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ß^4=î¿ΩD}í<                        q·eΩ«≤]<⁄Æs<                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ß^4=î¿ΩD}í<                        q·eΩ«≤]<⁄Æs<                                                                                                                                    ‰pªóÔ<Õ¶âº                        ÷—œ<mö˘º\‘º                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ‰pªóÔ<Õ¶âº                        ÷—œ<mö˘º\‘º                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ‰pªóÔ<Õ¶âº                        ÷—œ<mö˘º\‘º                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ‰pªóÔ<Õ¶âº                        ÷—œ<mö˘º\‘º                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ‰pªóÔ<Õ¶âº                        ÷—œ<mö˘º\‘º                                                                                                                                    ´¯ºÓÉºh—ó;                        ∏i;¢(‘∫µÔ◊9                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ´¯ºÓÉºh—ó;                        ∏i;¢(‘∫µÔ◊9                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ´¯ºÓÉºh—ó;                        ∏i;¢(‘∫µÔ◊9                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ´¯ºÓÉºh—ó;                        ∏i;¢(‘∫µÔ◊9                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ´¯ºÓÉºh—ó;                        ∏i;¢(‘∫µÔ◊9                                                                                                *BBwide_rg_hand1_colsJ(	       6       c       ê       Ω       *Bwide_rg_hand1_frontJ
+◊£>*"Bwide_rg_hand1_depth_gainJ  †@*Bwide_rg_hand1_radiusJff&?*(Bwide_rg_hand1_threat_gain_gainJ  @@*#Bwide_rg_hand1_guard_floorJffÊ>*)Bwide_rg_hand1_guard_threat_gainJÕÃ?*±#·Bwide_rg_hand1_mapJî#                                        /›ºÉ@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›ºÉ@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›ºÉ@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›ºÉ@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›ºÉ@=                                                                                                                                    *BBwide_rg_hand2_colsJ(       ?       l       ô       ∆       *Bwide_rg_hand2_frontJ
+◊£>*"Bwide_rg_hand2_depth_gainJ  †@*Bwide_rg_hand2_radiusJff&?*(Bwide_rg_hand2_threat_gain_gainJ  @@*#Bwide_rg_hand2_guard_floorJffÊ>*)Bwide_rg_hand2_guard_threat_gainJÕÃ?*±#·Bwide_rg_hand2_mapJî#                                                                            /›<É@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›<É@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›<É@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›<É@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›<É@=                                                                                                *)Bwide_rg_lean_colsJ÷      Ã      *$Bwide_rg_lean_gainsJff¿)\>*£·Bwide_rg_balance_mapJÑ                                        ¶õDºÕÃÃº                            ¶õDºÕÃÃ<                                                                                                                                        ¶õDºÕÃÃº                            ¶õDºÕÃÃ<                                                                                                                                        ¶õDºÕÃÃº                            ¶õDºÕÃÃ<                                                                                                                                        ¶õDºÕÃÃº                            ¶õDºÕÃÃ<                                                                                                                                        ¶õDºÕÃÃº                            ¶õDºÕÃÃ<                                                                                                *Bwide_minimum_stepJ    *Bwide_rear_sectorJffÊæ*Bwide_minus_oneJ  Äø*Bwide_max_turn_rateJ33@*8Bwide_angle_shapeJ                             *:Bwide_vectors_shapeJ                             *Bwide_x_lastJ        *Bwide_y_lastJ       *Bwide_z_lastJ       *)Bwide_output_shapeJ       ·       *0Bwide_r3_old_root_indicesJ              *Bwide_r3_preview_gainJ´™™>*Bwide_r3_preview_limitJÕÃÃ<*Bwide_r3_onsetJ–r?*'Bwide_r3_compression_gain_gainJUUA*"Bwide_r3_retreat_deadbandJoÉ;*&Bwide_r3_retreat_history_gainJ   B*Bwide_r3_releaseJÛ&?*$Bwide_r3_release_scale_gainJrJ.A*%Bwide_r3_carried_escape_gainJff&?*"Bwide_r3_active_gait_gainJ33s?*#Bwide_r3_carried_gait_gainJÕÃ?* Bwide_r3_cap_slope_gainJ  êA*Bwide_r3_retreat_baseJè¬ı=*'Bwide_r3_retreat_variable_gainJˆ(‹>*%Bwide_r3_escape_lateral_gainJè¬u>*Bwide_c3_threeJ  @@*Bwide_c3_yaw_dampingJÕÃÃ=*&Bwide_c3_yaw_rate_indexJŒ      *Bwide_c3_turn_minJ33¿*Bwide_c3_turn_maxJ33@*>Bwide_c3p_xidx1J(	       6       c       ê       Ω       *Bwide_c3p_phase_start1J)\è>*Bwide_c3p_phase_scale1J  †@*Bwide_c3p_press_gain1JÆGa>*Bwide_c3p_max_forward1JÆG?*µ#·Bwide_c3p_forward_map1Jî#                                      Ä?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Ä?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Ä?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Ä?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Ä?                                                                                                                                            *¥#·Bwide_c3p_height_map1Jî#                                            
+◊£Ω                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+◊£Ω                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+◊£Ω                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+◊£Ω                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+◊£Ω                                                                                                                                    *>Bwide_c3p_xidx2J(       ?       l       ô       ∆       *Bwide_c3p_phase_start2J)\è>*Bwide_c3p_phase_scale2J  †@*Bwide_c3p_press_gain2JÆGa>*Bwide_c3p_max_forward2JÆG?*µ#·Bwide_c3p_forward_map2Jî#                                                                          Ä?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Ä?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Ä?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Ä?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Ä?                                                                                                        *¥#·Bwide_c3p_height_map2Jî#                                                                                è¬ıΩ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    è¬ıΩ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    è¬ıΩ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    è¬ıΩ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    è¬ıΩ                                                                                                **B
+low_offsetJ        .ül<s?^º≤ÿÄø+ë£>*ò·B
+low_stanceJÑ            s?    ﬁ°æ„@†>vuÃΩN q?(Ω—>A>¿Y>DN?UŒoæ[ç?dêø{ÿ!>eùV?F¿÷>o–“Ω6X±=ÃcK?}ÏO>ƒÉ?nøß›6æ<∆Q?Ó”ºdÁò>E$›æ^xl?«©º>”í÷Ωπﬁ`>íæÈ÷n?œ=¯~QæÁy·æá∞f?%›æ ΩÅBW=N
+±<ñ?            s?    ﬁ°æ„@†>vuÃΩN q?(Ω—>A>¿Y>DN?UŒoæ[ç?dêø{ÿ!>eùV?F¿÷>o–“Ω6X±=ÃcK?}ÏO>ƒÉ?nøß›6æ<∆Q?Ó”ºdÁò>E$›æ^xl?«©º>”í÷Ωπﬁ`>íæÈ÷n?œ=¯~QæÁy·æá∞f?%›æ ΩÅBW=N
+±<ñ?            s?    ﬁ°æ„@†>vuÃΩN q?(Ω—>A>¿Y>DN?UŒoæ[ç?dêø{ÿ!>eùV?F¿÷>o–“Ω6X±=ÃcK?}ÏO>ƒÉ?nøß›6æ<∆Q?Ó”ºdÁò>E$›æ^xl?«©º>”í÷Ωπﬁ`>íæÈ÷n?œ=¯~QæÁy·æá∞f?%›æ ΩÅBW=N
+±<ñ?            s?    ﬁ°æ„@†>vuÃΩN q?(Ω—>A>¿Y>DN?UŒoæ[ç?dêø{ÿ!>eùV?F¿÷>o–“Ω6X±=ÃcK?}ÏO>ƒÉ?nøß›6æ<∆Q?Ó”ºdÁò>E$›æ^xl?«©º>”í÷Ωπﬁ`>íæÈ÷n?œ=¯~QæÁy·æá∞f?%›æ ΩÅBW=N
+±<ñ?            s?    ﬁ°æ„@†>vuÃΩN q?(Ω—>A>¿Y>DN?UŒoæ[ç?dêø{ÿ!>eùV?F¿÷>o–“Ω6X±=ÃcK?}ÏO>ƒÉ?nøß›6æ<∆Q?Ó”ºdÁò>E$›æ^xl?«©º>”í÷Ωπﬁ`>íæÈ÷n?œ=¯~QæÁy·æá∞f?%›æ ΩÅBW=N
+±<ñ?* Blow_peer_x_indexJ8      * Blow_peer_y_indexJ9      *Blow_time_indexJG      *Blow_epsJ∑—8*Blow_zeroJ    *Blow_oneJ  Ä?*Blow_frequencyJ≥√¿*.Blow_future_phaseJt£˘=t£y>ó:ª>t£˘>)?*)Blow_horizonJ
+◊£<
+◊#=è¬u=
+◊£=ÕÃÃ=*B
+low_speed0Jì„&?*Blow_stride0J∏>*B
+low_speed1Jì„&?*Blow_stride1J∏>*B	low_lift0Jºtì=*B	low_lift1Jºtì=*Blow_transfer_gainJu^cΩ*Blow_self_vx_idxJ¸      *Blow_self_vy_idxJ˝      *Blow_lookaheadJè¬u>*)Blow_state_gains_flat_sizeJ∂      *-Blow_state_gains_shapeJI             *Blow_state_gains_indexJ`ÿ      ﬂ      `      g      ¸      	      ~      Ö      ¥      ª      Ë      Ô      *NBlow_state_gains_valuesJ0è¬uæè¬uæöôøöôøÕÃL¿ÕÃL@  Ä@  Ä@  Ä@  Ä@Æ«øÆ«ø*.Blow_support_response_flat_sizeJF      *2Blow_support_response_shapeJ       ·       *ıZBlow_support_response_indexJ–        	                     $       -       6       ?       H       Q       Z       c       l       u       ~       á       ê       ô       ¢       ´       ¥       Ω       ∆       œ       ÿ       ‚       Î       Ù       ˝                         !      *      3      <      E      N      W      `      i      r      {      Ñ      ç      ñ      ü      ®      ±      ∫      ¬      À      ‘      Ô      ¯                  %      .      I      R      [      v            à      §      ≠      ∂      —      ⁄      „      ˛                  +      4      =      X      a      j      Ñ      ±      ﬁ            8      f      ì      ¿      Ì            *åZBlow_support_response_valuesJËˇx/=Ÿ&=Ÿ&=uÄºuÄº?W[=èp:=èp:=S'†ºS'†ºøöÉ=E∫_=E∫_=//¿º//¿º‡âô=˛ÅÇ=˛ÅÇ=7‡º7‡ºˇxØ=Ÿ&ï=Ÿ&ï=u Ωu Ωˇx/=Ÿ&=Ÿ&=uÄºuÄº?W[=èp:=èp:=S'†ºS'†ºøöÉ=E∫_=E∫_=//¿º//¿º‡âô=˛ÅÇ=˛ÅÇ=7‡º7‡ºˇxØ=Ÿ&ï=Ÿ&ï=u Ωu Ω\èB=B`%=B`%=33s=R∏N=R∏N=ÖÎë=bx=bx=q=™=9¥ê=9¥ê=\è¬=B`•=B`•=\èB=B`%=B`%=33s=R∏N=R∏N=ÖÎë=bx=bx=q=™=9¥ê=9¥ê=\è¬=B`•=B`•=„•õº\è¬º’xÈº'1Ω„•Ω„•õº\è¬º’xÈº'1Ω„•Ω*,Blow_locomotion_map_flat_sizeJ^      *0Blow_locomotion_map_shapeJ       ·       *£PBlow_locomotion_map_indexJÄ        	                     $                          )      2            %      .      7      @      *      3      <      E      N      8      A      J      S      \      Ä      â      é      ó      ú      •      ™      ≥      ∏      ¡      À      ‘      ›      Ê      Ô      Ÿ	      ‚	      Î	      Ù	      ˝	      Á
+      
+      ˘
+                  ı      ˛                                                '      K      T      Y      b      g      p      u      ~      É      å      ±      ø      Õ      €      È            -      ;      I      W      *‚PBlow_locomotion_map_valuesJ¿  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Ä?  Ä?ÕÃL?ÕÃL?  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Äø  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?**Blow_transfer_map_flat_sizeJe      *.Blow_transfer_map_shapeJ       ·       *òBlow_transfer_map_indexJx       
+                          !            &      /      +      4      =      9      B      K      *[Blow_transfer_map_valuesJ<  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?  Ä?*"Blow_review_xy_axisJ       */Blow_obstacle_pelvis_idxJ8      9      **Blow_left_glove_idxJ;      <      *+Blow_right_glove_idxJ>      ?      *)Blow_left_foot_idxJA      B      **Blow_right_foot_idxJD      E      *Blow_foot_term_factorJ∏>*Blow_glove_term_factorJ)\è=* Blow_pelvis_term_factorJöô?*Blow_glove_allowanceJÆGa>*)Blow_proximity_adjustment_factorJffÊ>*Blow_inner_distanceJè¬u>*Blow_outer_distanceJÖÎ—>*"Blow_near_strength_factorJ33@*!Blow_far_strength_factorJ   @*Blow_far_radial_factorJöôô?* Blow_near_radial_factorJÏQ8>*!Blow_near_lateral_factorJè¬ı=* Blow_far_lateral_factorJÕÃÃ<*Blow_x_columnJ        *Blow_y_columnJ       *Blow_match_durationJ  pB*Blow_strike_omegaJGÑA*Blow_twoJ   @*Blow_engagement_radiusJff¶?*Blow_engagement_gainJ   @*Úå·Blow_trained_wrist_mapJ–å                                    öÄ9Ωõ8ˆº¯Îü<                        VãvΩôıÖº0Í=                        œ<˝Sº)ª                        YC≠º/_Íª
+OJ<                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                öÄ9Ωõ8ˆº¯Îü<                        VãvΩôıÖº0Í=                        œ<˝Sº)ª                        YC≠º/_Íª
+OJ<                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                öÄ9Ωõ8ˆº¯Îü<                        VãvΩôıÖº0Í=                        œ<˝Sº)ª                        YC≠º/_Íª
+OJ<                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                öÄ9Ωõ8ˆº¯Îü<                        VãvΩôıÖº0Í=                        œ<˝Sº)ª                        YC≠º/_Íª
+OJ<                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                öÄ9Ωõ8ˆº¯Îü<                        VãvΩôıÖº0Í=                        œ<˝Sº)ª                        YC≠º/_Íª
+OJ<                                                            ‚@æÏ—ö=ŸpCΩ                        B/D>øn–=–à¬=                        -'Ê;˚¥òª’ó<                        y∆º‡ç<”S˜;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ‚@æÏ—ö=ŸpCΩ                        B/D>øn–=–à¬=                        -'Ê;˚¥òª’ó<                        y∆º‡ç<”S˜;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ‚@æÏ—ö=ŸpCΩ                        B/D>øn–=–à¬=                        -'Ê;˚¥òª’ó<                        y∆º‡ç<”S˜;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ‚@æÏ—ö=ŸpCΩ                        B/D>øn–=–à¬=                        -'Ê;˚¥òª’ó<                        y∆º‡ç<”S˜;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ‚@æÏ—ö=ŸpCΩ                        B/D>øn–=–à¬=                        -'Ê;˚¥òª’ó<                        y∆º‡ç<”S˜;                                                            iRﬂªß÷B<™Gøª                        »‘á:∂ ŸªÜª                        Zë*ªxDÿ∫G’Ω9                        $‡ñª›Ï:êìÉπ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                iRﬂªß÷B<™Gøª                        »‘á:∂ ŸªÜª                        Zë*ªxDÿ∫G’Ω9                        $‡ñª›Ï:êìÉπ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                iRﬂªß÷B<™Gøª                        »‘á:∂ ŸªÜª                        Zë*ªxDÿ∫G’Ω9                        $‡ñª›Ï:êìÉπ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                iRﬂªß÷B<™Gøª                        »‘á:∂ ŸªÜª                        Zë*ªxDÿ∫G’Ω9                        $‡ñª›Ï:êìÉπ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                iRﬂªß÷B<™Gøª                        »‘á:∂ ŸªÜª                        Zë*ªxDÿ∫G’Ω9                        $‡ñª›Ï:êìÉπ                                                            ©e“<›vÚº· ¥;                        ÊH+<’p<ù8ì<                        ‘ÃH;•—æ∫Ô{π                        Ím	;∫Ä⁄∫˘4ª                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ©e“<›vÚº· ¥;                        ÊH+<’p<ù8ì<                        ‘ÃH;•—æ∫Ô{π                        Ím	;∫Ä⁄∫˘4ª                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ©e“<›vÚº· ¥;                        ÊH+<’p<ù8ì<                        ‘ÃH;•—æ∫Ô{π                        Ím	;∫Ä⁄∫˘4ª                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ©e“<›vÚº· ¥;                        ÊH+<’p<ù8ì<                        ‘ÃH;•—æ∫Ô{π                        Ím	;∫Ä⁄∫˘4ª                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ©e“<›vÚº· ¥;                        ÊH+<’p<ù8ì<                        ‘ÃH;•—æ∫Ô{π                        Ím	;∫Ä⁄∫˘4ª                        *ABlow_rg_hand1_colsJ(	       6       c       ê       Ω       *Blow_rg_hand1_frontJ
+◊£>*!Blow_rg_hand1_depth_gainJ  †@*Blow_rg_hand1_radiusJff&?*'Blow_rg_hand1_threat_gain_gainJ  @@*"Blow_rg_hand1_guard_floorJffÊ>*(Blow_rg_hand1_guard_threat_gainJÕÃ?*∞#·Blow_rg_hand1_mapJî#                                        /›ºÉ@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›ºÉ@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›ºÉ@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›ºÉ@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›ºÉ@=                                                                                                                                    *ABlow_rg_hand2_colsJ(       ?       l       ô       ∆       *Blow_rg_hand2_frontJ
+◊£>*!Blow_rg_hand2_depth_gainJ  †@*Blow_rg_hand2_radiusJff&?*'Blow_rg_hand2_threat_gain_gainJ  @@*"Blow_rg_hand2_guard_floorJffÊ>*(Blow_rg_hand2_guard_threat_gainJÕÃ?*∞#·Blow_rg_hand2_mapJî#                                                                            /›<É@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›<É@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›<É@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›<É@=                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                /›<É@=                                                                                                *(Blow_rg_lean_colsJ÷      Ã      *#Blow_rg_lean_gainsJff¿)\>*¢·Blow_rg_balance_mapJÑ                                        ¶õDºÕÃÃº                            ¶õDºÕÃÃ<                                                                                                                                        ¶õDºÕÃÃº                            ¶õDºÕÃÃ<                                                                                                                                        ¶õDºÕÃÃº                            ¶õDºÕÃÃ<                                                                                                                                        ¶õDºÕÃÃº                            ¶õDºÕÃÃ<                                                                                                                                        ¶õDºÕÃÃº                            ¶õDºÕÃÃ<                                                                                                *Blow_minimum_stepJ    *Blow_rear_sectorJffÊæ*Blow_minus_oneJ  Äø*Blow_max_turn_rateJ33”?*7Blow_angle_shapeJ                             *9Blow_vectors_shapeJ                             *B
+low_x_lastJ        *B
+low_y_lastJ       *B
+low_z_lastJ       *(Blow_output_shapeJ       ·       */Blow_r3_old_root_indicesJ              *Blow_r3_preview_gainJ´™™>*Blow_r3_preview_limitJÕÃÃ<*Blow_r3_onsetJ
+◊#?*&Blow_r3_compression_gain_gainJUUA*!Blow_r3_retreat_deadbandJoÉ;*%Blow_r3_retreat_history_gainJ   B*Blow_r3_releaseJ§p=?*#Blow_r3_release_scale_gainJ   A*$Blow_r3_carried_escape_gainJff&?*!Blow_r3_active_gait_gainJ33s?*"Blow_r3_carried_gait_gainJÕÃ?*Blow_r3_cap_slope_gainJ  êA*Blow_r3_retreat_baseJè¬ı=*&Blow_r3_retreat_variable_gainJˆ(‹>*$Blow_r3_escape_lateral_gainJè¬u>*(Blow_if_ankle_idxJÏ      ı      *Blow_if_ankle_groundJ)\=*Blow_if_height_floorJÖÎ>*Blow_if_height_error_kJ333?*#Blow_if_height_recovery_loJ    *#Blow_if_height_recovery_hiJÕÃÃ=*!Blow_if_peer_z_idxJ:      *Blow_if_torso_offsetJ
+◊#Ω*#Blow_if_desired_wrist_z_loJè¬ı<*#Blow_if_desired_wrist_z_hiJ
+◊£>*Blow_if_wrist_meanJ_.>*Blow_if_aim_blend_kJ   ?*Blow_if_aim_offset_loJ)\æ*Blow_if_aim_offset_hiJè¬u=*¢·Blow_if_recover_mapJÑ          Ä?                                  Ä?                                  Ä?                                                                                                          Ä?                                  Ä?                                  Ä?                                                                                                          Ä?                                  Ä?                                  Ä?                                                                                                          Ä?                                  Ä?                                  Ä?                                                                                                          Ä?                                  Ä?                                  Ä?                                                                                                *û·Blow_if_aim_mapJÑ                                              Ä?                                  Ä?                                                                                                                                              Ä?                                  Ä?                                                                                                                                              Ä?                                  Ä?                                                                                                                                              Ä?                                  Ä?                                                                                                                                              Ä?                                  Ä?                                                                                                *4Blow_if2_current_x_ixJ“      ”      ‘      *4Blow_if2_current_z_ixJ’      ÷      ◊      *0Blow_if2_z_yzx_ixJ                      *0Blow_if2_x_zxy_ixJ                      *0Blow_if2_z_zxy_ixJ                      *0Blow_if2_x_yzx_ixJ                      *4Blow_if2_matrix_shapeJ                     *îBlow_if2_peer_flat_ixJx8      9      :      ;      <      =      >      ?      @      A      B      C      D      E      F      *2Blow_if2_peer_shapeJ                     */Blow_if2_peer_flat_shapeJ              *‡C∏Blow_if2_own_history_ixJ¿C                                                                	       
+                                                                                                                                                                  !       "       #       $       %       &       '       (       )       *       +       ,       -       .       /       0       1       2       3       4       5       6       7       8       9       :       ;       <       =       >       ?       @       A       B       C       D       E       F       G       H       I       J       K       L       M       N       O       P       Q       R       S       T       U       V       W       X       Y       Z       [       \       ]       ^       _       `       a       b       c       d       e       f       g       h       i       j       k       l       m       n       o       p       q       r       s       t       u       v       w       x       y       z       {       |       }       ~              Ä       Å       Ç       É       Ñ       Ö       Ü       á       à       â       ä       ã       å       ç       é       è       ê       ë       í       ì       î       ï       ñ       ó       ò       ô       ö       õ       ú       ù       û       ü       †       °       ¢       £       §       •       ¶       ß       ®       ©       ™       ´       ¨       ≠       Æ       Ø       ∞       ±       ≤       ≥       ¥       µ       ∂       ∑       ∏       π       ∫       ª       º       Ω       æ       ø       ¿       ¡       ¬       √       ƒ       ≈       ∆       «       »       …               À       Ã       Õ       Œ       œ       –       —       “       ”       ‘       ’       ÷       ◊       ÿ       Ÿ       ⁄       €       ‹       ›       ﬁ       ﬂ       ‡       ·       ‚       „       ‰       Â       Ê       Á       Ë       È       Í       Î       Ï       Ì       Ó       Ô              Ò       Ú       Û       Ù       ı       ˆ       ˜       ¯       ˘       ˙       ˚       ¸       ˝       ˛       ˇ                                                              	      
+                                                                                                                                           !      "      #      $      %      &      '      (      )      *      +      ,      -      .      /      0      1      2      3      4      5      6      7      8      9      :      ;      <      =      >      ?      @      A      B      C      D      E      F      G      H      I      J      K      L      M      N      O      P      Q      R      S      T      U      V      W      X      Y      Z      [      \      ]      ^      _      `      a      b      c      d      e      f      g      h      i      j      k      l      m      n      o      p      q      r      s      t      u      v      w      x      y      z      {      |      }      ~            Ä      Å      Ç      É      Ñ      Ö      Ü      á      à      â      ä      ã      å      ç      é      è      ê      ë      í      ì      î      ï      ñ      ó      ò      ô      ö      õ      ú      ù      û      ü      †      °      ¢      £      §      •      ¶      ß      ®      ©      ™      ´      ¨      ≠      Æ      Ø      ∞      ±      ≤      ≥      ¥      µ      ∂      ∑      ∏      π      ∫      ª      º      Ω      æ      ø      ¿      ¡      ¬      √      ƒ      ≈      ∆      «      »      …             À      Ã      Õ      Œ      œ      –      —      “      ”      ‘      ’      ÷      ◊      ÿ      Ÿ      ⁄      €      ‹      ›      ﬁ      ﬂ      ‡      ·      ‚      „      ‰      Â      Ê      Á      Ë      È      Í      Î      Ï      Ì      Ó      Ô            Ò      Ú      Û      Ù      ı      ˆ      ˜      ¯      ˘      ˙      ˚      ¸      ˝      ˛      ˇ                                                             	      
+                                                                                                                                           !      "      #      $      %      &      '      (      )      *      +      ,      -      .      /      0      1      2      3      4      5      6      7      8      9      :      ;      <      =      >      ?      @      A      B      C      D      E      F      G      H      I      J      K      L      M      N      O      P      Q      R      S      T      U      V      W      X      Y      Z      [      \      ]      ^      _      `      a      b      c      d      e      f      g      h      i      j      k      l      m      n      o      p      q      r      s      t      u      v      w      x      y      z      {      |      }      ~            Ä      Å      Ç      É      Ñ      Ö      Ü      á      à      â      ä      ã      å      ç      é      è      ê      ë      í      ì      î      ï      ñ      ó      ò      ô      ö      õ      ú      ù      û      ü      †      °      ¢      £      §      •      ¶      ß      ®      ©      ™      ´      ¨      ≠      Æ      Ø      ∞      ±      ≤      ≥      ¥      µ      ∂      ∑      ∏      π      ∫      ª      º      Ω      æ      ø      ¿      ¡      ¬      √      ƒ      ≈      ∆      «      »      …             À      Ã      Õ      Œ      œ      –      —      “      ”      ‘      ’      ÷      ◊      ÿ      Ÿ      ⁄      €      ‹      ›      ﬁ      ﬂ      ‡      ·      ‚      „      ‰      Â      Ê      Á      Ë      È      Í      Î      Ï      Ì      Ó      Ô            Ò      Ú      Û      Ù      ı      ˆ      ˜      ¯      ˘      ˙      ˚      ¸      ˝      ˛      ˇ                                                             	      
+                                                                                                                                           !      "      #      $      %      &      '      (      )      *      +      ,      -      .      /      0      1      2      3      4      5      6      7      8      9      :      ;      <      =      >      ?      @      A      B      C      D      E      F      G      H      I      J      K      L      M      N      O      P      Q      R      S      T      U      V      W      X      Y      Z      [      \      ]      ^      _      `      a      b      c      d      e      f      g      h      i      j      k      l      m      n      o      p      q      r      s      t      u      v      w      x      y      z      {      |      }      ~            Ä      Å      Ç      É      Ñ      Ö      Ü      á      à      â      ä      ã      å      ç      é      è      ê      ë      í      ì      î      ï      ñ      ó      ò      ô      ö      õ      ú      ù      û      ü      †      °      ¢      £      §      •      ¶      ß      ®      ©      ™      ´      ¨      ≠      Æ      Ø      ∞      ±      ≤      ≥      ¥      µ      ∂      ∑      ∏      π      ∫      ª      º      Ω      æ      ø      ¿      ¡      ¬      √      ƒ      ≈      ∆      «      »      …             À      Ã      Õ      Œ      œ      –      —      “      ”      ‘      ’      ÷      ◊      ÿ      Ÿ      ⁄      €      ‹      ›      ﬁ      ﬂ      ‡      ·      ‚      „      ‰      Â      Ê      Á      Ë      È      Í      Î      Ï      Ì      Ó      Ô            Ò      Ú      Û      Ù      ı      ˆ      ˜      ¯      ˘      ˙      ˚      ¸      ˝      ˛      ˇ                                                             	      
+                                                                                                                                           !      "      #      $      %      &      '      (      )      *      +      ,      -      .      /      0      1      2      3      4      5      6      7      *(Blow_if2_clock_ixJG      H      *<Blow_if2_vector_shapeJ                             *=Blow_if2_matrix4_shapeJ                             *Blow_if3_far_limitJ33ì?*!Blow_if3_near_scale_gainJ  †@*Blow_if3_near_loJ    *Blow_if3_near_hiJ  Ä?*Blow_if3_too_closeJ\è¬>*&Blow_if3_clearance_scale_gainJ  †@*Blow_if3_clearance_loJ    *Blow_if3_clearance_hiJ  Ä?* Blow_if3_minimum_facingJÕÃL>*#Blow_if3_facing_scale_gainJUU’?*Blow_if3_facing_loJ    *Blow_if3_facing_hiJ  Ä?*ABlow_if3_hand1_idxJ(	       6       c       ê       Ω       *Blow_if3_hand1_onsetJ\è¬>*(Blow_if3_hand1_phase_scale_gainJIí‰@*$Blow_if3_hand1_extension_loJ    *$Blow_if3_hand1_extension_hiJ  Ä?*±#·Blow_if3_hand1_mapJî#                                    )\>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )\>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )\>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )\>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )\>                                                                                                                                            *ABlow_if3_hand2_idxJ(       ?       l       ô       ∆       *Blow_if3_hand2_onsetJ\è¬>*(Blow_if3_hand2_phase_scale_gainJIí‰@*$Blow_if3_hand2_extension_loJ    *$Blow_if3_hand2_extension_hiJ  Ä?*±#·Blow_if3_hand2_mapJî#                                                                        )\>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )\>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )\>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )\>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )\>                                                                                                        *Bmix_zeroJ    *Bmix_oneJ  Ä?*Bmix_root_x0_idxJ“      *Bmix_root_x1_idxJ”      *Bmix_root_x2_idxJ‘      *Bmix_root_z0_idxJ’      *Bmix_root_z1_idxJ÷      *Bmix_root_z2_idxJ◊      *Bmix_peer0_idxJ8      *Bmix_peer1_idxJ9      *Bmix_peer2_idxJ:      *$Bmix_left_ankle_z_idxJÏ      *%Bmix_right_ankle_z_idxJı      *Bmix_ankle_floor_mJÕÃÃ<*"Bmix_standing_threshold_mJöô?* Bmix_transition_width_mJè¬u=*.Bmix_pose_shapeJ              	       *0Bmix_position_idxJ                      *.Bmix_axis_x_idxJ                     *.Bmix_axis_z_idxJ                     *Bmix_axisJ       *Bmix_epsJˇÊ€.*&Bmix_flat_shapeJ       ·       Z
+obs
+	
+
+…b
+target_pose
+	
+
+·B
+ rA
+policy_contract.holomotion_v2_boxing_obs1097_target_pose225_v1
